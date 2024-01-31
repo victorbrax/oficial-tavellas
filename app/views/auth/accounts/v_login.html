@@ -1,0 +1,49 @@
+{% extends 'layouts/base-auth.html' %}
+{% block title %}Login{% endblock %}
+{% block head %}{% endblock %}
+
+{% block content %}
+<div class="container main">
+    <div class="row">
+      <div class="col-6 p-0 m-0 side-image">
+        <!-------------      image     ------------->
+        <img src="{{ url_for('static', filename='auth/accounts/images/covabra-logo.png') }}" alt="">
+        <!-- <div class="text"> -->
+          <!-- <p><strong>Portal Covabra</strong></p> -->
+        <!-- </div> -->
+      </div>
+      <div class="col-md-6 right">
+
+        <div class="input-box">
+
+          <header>Área de Acesso</header>
+          <form method="POST" action="{{ url_for('auth.login') }}">
+          {{ form.hidden_tag() }}
+          <div class="input-field">
+            {{ form.email(class_="input", id_="email", required_="", autocomplete_="off") }}
+            <label for="email">E-mail</label>
+          </div>
+          <div class="input-field">
+            {{ form.password(class_="input", id_="pass", required_="") }}
+            <label for="pass">Senha</label>
+          </div>
+          <div class="remember-field">
+            {{ form.remember_me(class_="remember-me") }}
+            <label for="remember_me">Lembre-se de mim</label>
+          </div>
+          <div class="input-field">
+            {{ form.submit(class_="submit", value="Entrar") }}
+          </div>
+        </form>
+        <div class="auth-text">
+          <span>Esqueceu sua <a href="{{ url_for('auth.forgot') }}">senha</a>?</span>
+        </div>
+        <div class="auth-text">
+          <span>Ainda não tem uma conta? <a href="{{ url_for('auth.register') }}">Registre-se</a></span>
+        </div>
+      </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Bikes{% endblock %}
+{% block head %}{% endblock %}
+
+{% block content %}
+<h1>Bikes</h1>
+<table id="data" class="table table-striped" style="width:100%">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Descrição</th>
+      <th>Modelo</th>
+      <th>Condição</th>
+      <th>Aro</th>
+      <th>Quadro</th>
+      <th>Cor</th>
+      <th>Dono(s)</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+{% include "geral/inc/modal_base.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+  $(document).ready(function () {
+    $('#data').DataTable({ // Carregar a tabela com AJAX
+      ajax: '{{ url_for("bike.data_bike") }}',
+      columnDefs: [{ "width": "12%", "targets": -1 }],
+      columns: [
+        { data: 'id' },
+        { data: 'descricao' },
+        { data: 'modelo' },
+        { data: 'condicao' },
+        { data: 'aro' },
+        { data: 'quadro' },
+        { data: 'cor' },
+        { data: 'clientes' },
+        { data: null, orderable: false, render: renderButtons }
+      ],
+      language: language_pt_br,
+      initComplete: function(settings, json) { // Função que executa após a requisição AJAX.
+        if ('is_createble' in json && json.is_createble) {
+        // Adicionar botão de Novo Registro antes do seletor de linhas.
+        $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bx bxs-plus-circle modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
+        $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
+      }
+      }
+    });
+
+    function renderButtons(data, type, row) { // Lógica para renderizar ou não os botões.
+      var buttons = '';
+
+      if (data.is_editable) {
+        buttons += '<i data-value="' + data.id + '" data-method="PUT" class="btn-tbl bx bxs-edit-alt modal-button" id="table-btn-edit"></i>';
+      }
+      if (data.is_deletable) {
+        buttons += '<i data-value="' + data.id + '" data-method="DELETE" class="btn-tbl bx bxs-trash modal-button" id="table-btn-delete"></i>';
+      }
+      if (data.is_reviewed) { // Botão que não exige renderização, apenas executa regra de negócio.
+        buttons += '<i data-value="' + data.id + '" data-method="XPTO" class="btn-tbl bx bxs-check-square call-api" id="table-btn-review"></i>';
+      }
+      return buttons;
+    }
+  });
+
+  function modalChoice(method, value) { // Fazer com que os botões renderizem o modal desejado.
+    $.ajax({
+      url: '{{ url_for("bike.render_bike") }}?method=' + method + '&value=' + value,
+      type: 'GET',
+      success: function (data) {
+        $('.modal-content').html(data);
+        $('#modalBase').modal('show');
+      }
+    });
+  }
+    
+  function submitAPI(method, value, data) { // Fazer com que os botões renderizem o modal desejado.
+    $.ajax({
+      url: '{{ url_for("bike.logic_bike") }}?method=' + method + '&value=' + value,
+      type: 'POST',
+      data: data,
+      success: function () {
+        $('#data').DataTable().ajax.reload();
+      }
+    });
+  }
+
+  $(document).on('click', '.modal-button', function () {
+    var method = $(this).data('method') || '';
+    var value = $(this).data('value') || 0;
+    modalChoice(method, value);
+  });
+
+  $(document).on('click', '.call-api', function () {
+    var method = $(this).data('method') || '';
+    var value = $(this).data('value') || 0;
+    var modalForm = $('#modalForm') || 0;
+    if (modalForm.length != 0) {
+      data = modalForm.serializeArray();  // Obter dados do formulário usando serializeArray do jQuery
+    } else {
+      data = [];
+    }
+    submitAPI(method, value, data);
+  });
+</script>
+{% endblock %}

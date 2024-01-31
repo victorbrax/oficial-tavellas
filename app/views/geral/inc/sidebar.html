@@ -1,0 +1,85 @@
+<div class="sidebar close">
+  <div class="logo-details">
+    <img src="{{ url_for('static', filename='geral/inc/icons/covabra/cic.png') }}" class="logotype">
+    <span class="logo_name">Portal do CIC</span>
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a href="{{ url_for('home.home') }}">
+        <i class='bx bx-grid-alt'></i>
+        <span class="link_name">Início</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="{{ url_for('home.home') }}">Início</a></li>
+      </ul>
+    </li>
+    <li>
+      <div class="iocn-link">
+        <a href="#">
+          <i class='bx bx-line-chart'></i>
+          <span class="link_name">Aplicações</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow'></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name" href="#">Relatórios</a></li>
+        {% if current_user.is_authenticated and current_user.has_role('rh') %}
+        <li><a href="{{ url_for('rh.home') }}">Recursos Humanos</a></li>
+        {% endif %}
+        {% if current_user.is_authenticated and current_user.has_role('financeiro') %}
+        <li><a href="{{ url_for('financeiro.home') }}">Financeiro</a></li>
+        {% endif %}
+      </ul>
+    </li>
+    <li>
+      <div class="iocn-link">
+        <a href="#">
+          <i class='bx bx-spreadsheet'></i>
+          <span class="link_name">Solicitações</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow'></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a class="link_name" href="#">Posts</a></li>
+        <li><a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=176" target="_blank">Novo
+            Relatório</a></li>
+        <li><a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=178" target="_blank">Acesso a
+            Relatórios</a></li>
+        <li><a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=177" target="_blank">Alteração
+            de Relatórios</a></li>
+        <li><a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=175"
+            target="_blank">Reprocessar Relatórios</a></li>
+        <li><a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=182" target="_blank">Dúvidas e
+            Contato</a></li>
+      </ul>
+    </li>
+    {% if current_user.is_authenticated and current_user.has_role('admin') %}
+    <li>
+      <div class="iocn-link">
+        <a href="{{ url_for('admin.index') }}">
+          <i class='bx bx-cog'></i>
+          <span class="link_name">Configurações</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow'></i>
+      </div>
+      <ul class="sub-menu">
+        <li><a href="{{ url_for('admin.index') }}">Painel de Administração</a></li>
+        <li><a href="{{ url_for('exemplo.uzuario') }}">Exemplo: Uzuários</a></li>
+        <li><a href="{{ url_for('exemplo.author') }}">Exemplo: Authors</a></li>
+      </ul>
+    </li>
+    {% endif %}
+    <li>
+      <div class="profile-details">
+        <div class="profile-content">
+          <img src="{{ current_user.image_path }}" alt="profileImg">
+        </div>
+        <div class="name-job">
+          <div class="profile_name">{{ current_user }}</div>
+          <div class="job">990576</div>
+        </div>
+        <a href="{{ url_for('auth.logout') }}"><i class='bx bx-log-out'></i></a>
+      </div>
+    </li>
+  </ul>
+</div>

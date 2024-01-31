@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Financeiro{% endblock %}
+{% block head %}{% endblock %}
+
+{% block content %}
+<div class="card-container">
+
+        <a href="{{ url_for('consolidador_rateio.consolidar_excels' ) }}">
+            <div class="card dark">
+                <img src="{{ url_for('static', filename='financeiro/home/images/excel.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <div class="title-section">
+                        <h5 class="card-title fw-bold">Consolidar Rateios</h5>
+                        <div class="tag-description">#Financeiro</div>
+                    </div>
+                    <div class="text-section">
+                        <p class="card-text">Aplicação para consolidar excels de rateio em apenas um excel</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        
+        
+</div>
+        
+{% endblock %}

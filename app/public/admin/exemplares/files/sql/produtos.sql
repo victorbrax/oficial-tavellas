@@ -1,0 +1,1 @@
+SELECT * FROM "Controle".monitoramento WHERE data_proxima_execucao = {today}

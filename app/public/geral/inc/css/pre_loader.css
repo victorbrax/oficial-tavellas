@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+}
+
+.loader {
+    /* Cobrir a página inteira */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #03010b;
+    z-index: 999; /* Colocar o loader acima de outros elementos */
+    transition: opacity 0.75s, visibility 0.75s;
+}
+
+/* Esconder o pre-loader depois do seu uso */
+.loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Responsável pelas animações e formato do pre-loader */
+.loader::after {
+    content: "";
+    width: 100px;
+    height: 100px;
+    background: url('/public/geral/inc/images/loader.gif') no-repeat center center;
+    background-size: 100%;
+}

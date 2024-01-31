@@ -1,0 +1,19 @@
+/* Flash Messages */
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    overflow-y: visible;
+    z-index: 1000;
+}
+
+.flash-message {
+    margin-bottom: 10px;
+    opacity: 0; /* Adicionando opacidade inicial para a transição */
+    transition: opacity 0.5s ease-in-out; /* Adicionando transição de opacidade */
+}
+
+.flash-message.show {
+    opacity: 1; /* Definindo opacidade para 1 quando a classe show é adicionada */
+}

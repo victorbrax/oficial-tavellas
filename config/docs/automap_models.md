@@ -1,0 +1,1 @@
+python -m sqlacodegen.main --flask --outfile tst.py --schema "public" --tables produto postgresql+psycopg2://postgres:postgres@10.95.7.4:5432/erp?client_encoding="utf-8" 

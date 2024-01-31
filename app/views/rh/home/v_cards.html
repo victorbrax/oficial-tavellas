@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Recursos Humanos{% endblock %}
+{% block head %}{% endblock %}
+
+{% block content %}
+<div class="card-container">
+    
+            <a href="http://rhdesligamentos.jard.covabra.com.br:8569/">
+                <div class="card dark">
+                    <img src="{{ url_for('static', filename='rh/images/rhimage.jpg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-section">
+                            <h5 class="card-title fw-bold">Dashboard de Desligamento</h5>
+                            <div class="tag-description">#RH</div>
+                        </div>
+                        <div class="text-section">
+                            <p class="card-text">Visualização dos índices de desligamento da rede de colaboradores.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        <a href="#">
+            <div class="card dark">
+                <img src="{{ url_for('static', filename='rh/images/absenteismo.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <div class="title-section">
+                        <h5 class="card-title fw-bold">Dashboard de Absenteísmo</h5>
+                        <div class="tag-description">#RH</div>
+                    </div>
+                    <div class="text-section">
+                        <p class="card-text">Visualização dos índices de absenteísmo da rede de colaboradores.</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+</div>
+        
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #ffffff;
+            /* Cor de fundo padrão */
+            color: #000;
+            /* Cor de texto padrão */
+        }
+
+        /* Modo Escuro */
+        body.dark-mode {
+            background-color: #333;
+            /* Cor de fundo no modo escuro */
+            color: #fff;
+            /* Cor de texto no modo escuro */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+        }
+
+        table th,
+        table td {
+            padding: 8px;
+            border: 1px solid #000;
+        }
+
+        table th {
+            background-color: #333;
+            /* Cor de fundo do cabeçalho */
+            color: #fff;
+            /* Cor do texto do cabeçalho */
+        }
+
+        /* Estilos no modo escuro */
+        body.dark-mode table th {
+            background-color: #666;
+        }
+
+        body.dark-mode table tr:nth-child(even) {
+            background-color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2 style="color: red;">ATENÇÃO: Solicitação de Troca de Senha</h2>
+    </header>
+    <main>
+        <p>Este é um e-mail para troca de senha da sua conta no Portal CIC - Covabra.</p>
+        <br>
+        <p>Caso você não tenha solicitado uma troca de senha para sua conta, por favor, <strong>ignore este e-mail</strong> e entre em contato com o time do CIC.</p>
+        <p><strong>Para recuperar sua senha, <a href="{{ reset_link }}">clique aqui.</a>
+            
+    </main>
+    <footer>
+        <p style="font-size: 15px;">
+            <b>CIC</b> - <span style="color: #2a8d2a;">Célula de Informação</span> | Covabra Supermercados. <br>
+            Para dúvidas ou contato com o Time de Desenvolvimento, <a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=182">clique aqui.</a>
+        </p>
+    </footer>
+</body>
+
+</html>

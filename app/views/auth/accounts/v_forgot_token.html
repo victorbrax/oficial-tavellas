@@ -1,0 +1,40 @@
+{% extends 'layouts/base-auth.html' %}
+{% block title %}Recuperação de Senha{% endblock %}
+{% block head %}{% endblock %}
+
+{% block content %}
+  <div class="container main">
+    <div class="row">
+      <div class="col-6 p-0 m-0 side-image">
+        <!-------------      image     ------------->
+        <img src="{{ url_for('static', filename='auth/accounts/images/covabra-logo.png') }}" alt="">
+        <!-- <div class="text"> -->
+          <!-- <p><strong>Portal Covabra</strong></p> -->
+        <!-- </div> -->
+      </div>
+      <div class="col-md-6 right">
+
+        <div class="input-box">
+
+          <header>Área de Recuperação</header>
+          <div class="auth-text">
+            <span>Por favor, preencha a nova senha para sua conta.</span>
+          </div>
+          <form method="POST" action="{{ url_for('auth.forgot_reset', token=token) }}">
+          {{ form.hidden_tag() }}
+          <div class="input-field">
+            {{ form.password(class_="input", id_="pass", required_="") }}
+            <label for="pass">Senha</label>
+          </div>
+          <div class="input-field">
+            {{ form.confirm_password(class_="input", id_="pass", required_="") }}
+            <label for="pass">Confirmação de Senha</label>
+          </div>
+          <div class="input-field">
+            {{ form.submit(class_="submit", value="Confirmar") }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

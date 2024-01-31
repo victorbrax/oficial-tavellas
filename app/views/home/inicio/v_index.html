@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Início{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home/css/styles.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="overlay"></div>
+<div class="stars" aria-hidden="true"></div>
+<div class="starts2" aria-hidden="true"></div>
+<div class="stars3" aria-hidden="true"></div>
+<main class="main">
+
+	<img class="logo-home" src="{{ url_for('static', filename='home/images/covabra_logo_horizontal_negativo.png') }}" alt="">
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

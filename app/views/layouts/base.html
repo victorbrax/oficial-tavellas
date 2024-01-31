@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Título da Página -->
+  <title>{% block title %}{% endblock %}</title>
+  {% include 'geral/inc/styles.html' %}
+  <!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css"> <!-- Apenas Base -->
+<!-- CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='geral/inc/css/header.css') }}"> <!-- Apenas Base -->
+<link rel="stylesheet" href="{{ url_for('static', filename='geral/inc/css/sidebar.css') }}"> <!-- Apenas Base -->
+<link rel="stylesheet" href="{{ url_for('static', filename='geral/inc/css/cards.css') }}"> <!-- Apenas Base -->
+<link rel="stylesheet" href="{{ url_for('static', filename='geral/inc/css/modals.css') }}"> <!-- Apenas Base -->
+<link rel="stylesheet" href="{{ url_for('static', filename='geral/inc/css/tables.css') }}"> <!-- Apenas Base -->
+{% block head %}{% endblock %}
+</head>
+
+<body>
+    {% include 'geral/inc/pre_loader.html' %} <!-- Mensagens Flash -->
+    {% include 'geral/inc/flash_messages.html' %} <!-- Mensagens Flash -->
+    {% include 'geral/inc/sidebar.html' %} <!-- Sidebar -->
+    <!-- {% include 'geral/inc/header.html' %} <-- Header -->
+    <section class="home-section">
+        <h2 class="page-title">{% block pagetitle %}{% endblock %}</h2>
+        <div class="page-content">
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+    {% include 'geral/inc/scripts.html' %}
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script> <!-- Apenas Base -->
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script> <!-- Apenas Base -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script> <!-- Apenas Base -->
+
+    <!-- Aplicação -->
+    <script src="{{ url_for('static', filename='geral/inc/js/sidebar.js') }}"></script> <!-- Apenas Base -->
+    <script src="{{ url_for('static', filename='geral/inc/js/tables.js') }}"></script> <!-- Apenas Base -->
+
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+{% extends "layouts/base.html" %}
+{% block title %}Consolidar Rateios{% endblock %}
+{% block head %}{% endblock %}
+
+{% block content %}
+    <div class="form-group">
+        <form action="/financeiro/consolidar_rateio" method="post" enctype="multipart/form-data" id="form">
+            <input type="file" id="inputFiles" name="files" multiple required accept=".xls">
+            <div>
+                <ul id="fileList"></ul>
+            </div>
+            <br>
+            <input type="submit" value="Consolidar" class="btn btn-primary" method="post">
+        </form>
+    </div>
+
+    {% if url_download %}
+        <!-- <a href="{{ download }}" class="btn btn-primary">Download</a> -->
+        <br><br>
+        <td>
+            <a class="btn btn-success btn-sm" href="{{ url_download }}" target="_blank">Download</a>
+        </td>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    
+    <script>
+        var files2 = {};
+        var input = document.getElementById('inputFiles');
+        var form = document.getElementById('form');
+        input.addEventListener('change', function() {
+            var new_files = this.files;
+            for(var i=0; i<new_files.length; i++){
+                if (new_files[i].name in files2) {
+                    continue;
+                }
+                files2[new_files[i].name] = new_files[i];
+
+                var li = document.createElement('li');
+                li.innerHTML = new_files[i].name;
+                li.setAttribute('id', new_files[i].name);
+                var button = document.createElement('button');
+                button.innerHTML = 'X';
+                button.setAttribute('type', 'button');
+                button.setAttribute('class', 'btn btn-danger btn-sm');
+                button.setAttribute('style', 'margin-left: 10px;');
+                button.setAttribute('onclick', 'removeFile(this.parentNode)');
+                li.appendChild(button);
+                document.getElementById('fileList').appendChild(li);
+            }
+            const dt = new DataTransfer();
+            for (var key in files2) {
+                dt.items.add(files2[key]);
+            }
+            this.files = dt.files;
+
+        }, false);
+
+        function removeFile(li) {
+            const file_name = li.getAttribute('id');
+            delete files2[file_name];
+
+            const input = document.getElementById('inputFiles');
+            const dt = new DataTransfer();
+            for (var key in files2) {
+                dt.items.add(files2[key]);
+            }
+            input.files = dt.files;
+            li.remove();
+        }
+
+    </script>
+{% endblock %}

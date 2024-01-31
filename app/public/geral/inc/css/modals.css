@@ -1,0 +1,18 @@
+.form-label{
+    font-weight:500;
+    margin-bottom:5px;
+    padding:4px;
+    border-radius:4px;
+  }
+
+  input{
+    margin-bottom:5px
+  }
+
+.modal-content {
+    padding: 0.5em;
+}  
+
+.modal-body {
+    padding: 0, 2.5em;
+}  

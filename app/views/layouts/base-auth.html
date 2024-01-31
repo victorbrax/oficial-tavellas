@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Título da Página -->
+  <title>{% block title %}{% endblock %}</title>
+{% include 'geral/inc/styles.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth/accounts/css/auth.css') }}"> <!-- Apenas Base-Auth -->
+{% block head %}{% endblock %}
+</head>
+
+<body>
+  {% include 'geral/inc/pre_loader.html' %} <!-- Mensagens Flash -->
+  {% include 'geral/inc/flash_messages.html' %} <!-- Mensagens Flash -->
+  {% block content %}{% endblock %}
+  {% include 'geral/inc/scripts.html' %}
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>

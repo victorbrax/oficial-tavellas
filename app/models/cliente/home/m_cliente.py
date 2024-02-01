@@ -1,4 +1,3 @@
-# from app.models.admin.exemplares.m_author_books import authors_books
 from database import db
 
 from ... import SkeletonModel
@@ -11,18 +10,34 @@ class Cliente(db.Model, SkeletonModel):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
     celular = db.Column(db.String(50), nullable=False)
-    telefone = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    telefone = db.Column(db.String(100), nullable=False)
+    cep = db.Column(db.Integer)
+    rua = db.Column(db.String(150))
+    bairro  = db.Column(db.String(80))
+    numero = db.Column(db.Integer)
+    complemento = db.Column(db.String(256))
+    cidade = db.Column(db.String(40))
+    estado = db.Column(db.String(30))
 
-    def __init__(self, nome, celular, telefone):
+    def __init__(self, nome, celular, telefone, email, cep,  rua, bairro, numero, cidade, estado):
         self.nome = nome
         self.celular = celular
         self.telefone = telefone
+        self.email = email
+        self.cep = cep
+        self.rua = rua
+        self.bairro = bairro
+        self.numero = numero
+        self.cidade = cidade
+        self.estado = estado
+
 
     def __repr__(self):
         return "<Cliente %r>" % self.id
     
     def __str__(self):
-        return self.nome
+        return f"{self.id}. {self.nome}"
 
     def to_dict(self):
         model_dict = super().to_dict()

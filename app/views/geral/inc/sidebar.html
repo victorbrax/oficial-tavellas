@@ -23,9 +23,6 @@
       </div>
       <ul class="sub-menu">
         <li><a class="link_name" href="#">Relatórios</a></li>
-        {% if current_user.is_authenticated and current_user.has_role('rh') %}
-        <li><a href="{{ url_for('rh.home') }}">Recursos Humanos</a></li>
-        {% endif %}
         {% if current_user.is_authenticated and current_user.has_role('financeiro') %}
         <li><a href="{{ url_for('financeiro.home') }}">Financeiro</a></li>
         {% endif %}

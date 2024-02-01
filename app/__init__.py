@@ -44,8 +44,8 @@ def create_app():
         "auth.accounts",
         "geral.errors",
         "bike.home", # Home
+        "cliente.home", # Home
         "financeiro.home", # Home
-        "rh.home", # Home
         "financeiro.consolidador_rateio", # Departamento App
     ]
 

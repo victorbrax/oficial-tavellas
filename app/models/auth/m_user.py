@@ -1,3 +1,4 @@
+from app.models.auth.m_user_roles import role_user
 import secrets
 from datetime import datetime, timedelta
 
@@ -10,6 +11,7 @@ from .. import SkeletonModel
 
 class User(db.Model, UserMixin, SkeletonModel):
     __tablename__ = "user"
+    __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(255))
@@ -20,7 +22,7 @@ class User(db.Model, UserMixin, SkeletonModel):
     image_path = db.Column(db.String(255))
     user_token = db.Column(db.String(255))
     token_expiration = db.Column(db.DateTime)
-    roles = db.relationship("Role", secondary="role_user", backref=db.backref("user", lazy="dynamic"))
+    roles = db.relationship("Role", secondary=role_user, backref=db.backref("user", lazy="dynamic"))
 
     def __init__(self, first_name, last_name, email, password, active):
         self.first_name = first_name

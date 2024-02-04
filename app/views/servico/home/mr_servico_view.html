@@ -1,0 +1,86 @@
+{% if method == "POST" %}
+
+<div class="modal-header">
+  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
+  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+</div>
+<div class="modal-body">
+  <p>{{ modal_data["body"] }}</p>
+
+  <form id="modalForm">
+    {{ forms.hidden_tag() }}
+    {{ forms.csrf_token }}
+    <div class="form-group">
+      <label class="form-label" for="data_inicio">Data de Início:</label>
+      {{ forms.data_inicio(class_="form-control") }}
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="reparos">Reparos:</label>
+      {{ forms.reparos(class_="form-control") }}
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="cliente_id">Cliente:</label>
+      {{ forms.cliente_id(class_="form-control") }}
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="bike_id">Bike:</label>
+      {{ forms.bike_id(class_="form-control") }}
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+  <button class="btn btn-success call-api" data-method="POST" id="xpto" data-dismiss="modal">Inserir</button>
+</div>
+
+{% elif method == "PUT" %}
+
+<div class="modal-header">
+  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
+  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+</div>
+<div class="modal-body">
+  <p>{{ modal_data["body"] }}</p>
+
+  <form id="modalForm">
+    {{ forms.hidden_tag() }}
+    {{ forms.csrf_token }}
+    <div class="form-group">
+      <label class="form-label" for="nome">Nome:</label>
+      {{ forms.nome(class_="form-control") }}
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="valor">Valor:</label>
+      {{ forms.valor(class_="form-control") }}
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="qtd_horas">Quantidade de Horas:</label>
+      {{ forms.qtd_horas(class_="form-control") }}
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" id="xpto"
+    data-dismiss="modal">Editar</button>
+</div>
+
+{% elif method == "DELETE" %}
+
+<div class="modal-header">
+  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
+  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+</div>
+<div class="modal-body">
+  <p>{{ modal_data["body"] }}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+  <button data-value="{{ value }}" data-method="DELETE" class="btn btn-danger call-api" id="tbl-btn-delete"
+    data-dismiss="modal">Remover</button>
+</div>
+
+{% else %}
+<p>Chamada Inválida.</p>
+{% endif %}

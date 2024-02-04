@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import (EmailField, IntegerField, StringField, SubmitField, validators)
+from wtforms import (IntegerField, StringField, SubmitField, validators)
 from app.models.cliente.home.m_cliente import Cliente
 from wtforms_alchemy import QuerySelectMultipleField
 

@@ -25,7 +25,13 @@ class Bike(db.Model, SkeletonModel):
         self.quadro = quadro
         self.cor = cor
         self.clientes = clientes
-
+    
+    def __repr__(self):
+        return "<Bike %r>" % self.id
+    
+    def __str__(self):
+        return f"{self.id}. {self.descricao}"
+    
     def to_dict(self):
         model_dict = super().to_dict()
         model_dict['is_reviewed'] = self.is_reviewed

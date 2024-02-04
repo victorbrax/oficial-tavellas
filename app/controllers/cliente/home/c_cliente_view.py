@@ -11,7 +11,7 @@ from . import bp
 @bp.route("/view")
 @login_required
 @role_required(["admin"])
-def author():
+def cliente():
     return render_template("cliente/home/v_cliente_view.html")
 
 @bp.route('/data_cliente')

@@ -15,6 +15,8 @@ from app.models.admin.exemplares.m_author import Author
 from app.models.admin.exemplares.m_book import Book
 from app.models.admin.exemplares.m_author_books import authors_books
 
+from app.models.reparo.home.m_reparo import Reparo
+
 from config import DevelopmentConfig
 from database import db
 
@@ -45,6 +47,8 @@ def create_app():
         "geral.errors",
         "bike.home", # Home
         "cliente.home", # Home
+        "reparo.home", # Home
+        "servico.home", # Home
         "financeiro.home", # Home
         "financeiro.consolidador_rateio", # Departamento App
     ]

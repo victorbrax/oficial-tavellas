@@ -18,7 +18,9 @@ def servico():
 @login_required
 @role_required(["admin"])
 def data_servico():
-    return {'data': [servico.to_dict() for servico in Servico.query], 'is_createble': Servico.is_createble()}
+    return {'data': [servico.to_dict() for servico in Servico.query], 
+            'is_createble': Servico.is_createble(),
+            'kronik': [servico.extra_dict() for servico in Servico.query]}
 
 @bp.route('/render_servico', methods=["GET", "POST"])
 @login_required
@@ -69,14 +71,11 @@ def logic_servico(): # Regra de Negócio
                     data_inicio = forms.data_inicio.data,
                     data_fim = forms.data_fim.data,
                     reparos = forms.reparos.data,
-                    preco_total = forms.preco_total.data,
-                    cliente_id = forms.cliente_id.data,
-                    bike_id = forms.bike_id.data
+                    cliente = forms.cliente.data,
+                    bike = forms.bike.data
                     )
-                print(forms.reparos.data)
-                print(forms.cliente_id.data)
-                print(forms.bike_id.data)
-                # servico.save()
+                servico.update_preco_total()
+                servico.save()
                 return jsonify(success=True, message="Servico criado com sucesso.")
             else:
                 print(forms.errors)
@@ -87,9 +86,9 @@ def logic_servico(): # Regra de Negócio
                 servico.data_inicio = forms.data_inicio.data
                 servico.data_fim = forms.data_fim.data
                 servico.reparos = forms.reparos.data
-                servico.preco_total = forms.preco_total.data
-                servico.cliente_id = forms.cliente_id.data
-                servico.bike_id = forms.bike_id.data
+                servico.cliente = forms.cliente.data
+                servico.bike = forms.bike.data
+                servico.update_preco_total()
                 servico.edit()
                 return jsonify(success=True, message="Serviço editado com sucesso.")
             else:
@@ -102,7 +101,7 @@ def logic_servico(): # Regra de Negócio
 
         case "XPTO":
             servico = Servico.query.get(value)
-            servico.nome = servico.nome.swapcase()
+            # servico = servico.swapcase()
             servico.edit()
             return jsonify(success=True, message="Serviço revisado com sucesso.")
 

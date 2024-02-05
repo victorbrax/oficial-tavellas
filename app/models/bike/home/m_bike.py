@@ -15,6 +15,7 @@ class Bike(db.Model, SkeletonModel):
     aro = db.Column(db.String(50), nullable=False)
     quadro = db.Column(db.Integer)
     cor = db.Column(db.String(50), nullable=False)
+    
     clientes = db.relationship('Cliente', secondary=bike_cliente, backref=db.backref('bike', lazy='dynamic'))
 
     def __init__(self, descricao, modelo, condicao, aro, quadro, cor, clientes):

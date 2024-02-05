@@ -8,10 +8,13 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>Bicicleta</th>
       <th>Data de Início</th>
       <th>Data de Término</th>
-      <th>Preço Total</th>
       <th>Reparos</th>
+      <th>Usuário</th>
+      <th>Cliente</th>
+      <th>Preço Total</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -30,10 +33,13 @@
       columnDefs: [{ "width": "12%", "targets": -1 }],
       columns: [
         { data: 'id' },
-        { data: 'data_inicio' },
-        { data: 'data_fim' },
+        { data: 'bike' },
+        { data: 'data_inicio', render: DataTable.render.datetime('DD/MM/YYYY - HH:mm') },
+        { data: 'data_fim', render: DataTable.render.datetime('DD/MM/YYYY - HH:mm') },
+        { data: 'reparos' },
+        { data: 'usuario' },
+        { data: 'cliente' },
         { data: 'preco_total' },
-        { data: 'servicos' },
         { data: null, orderable: false, render: renderButtons }
       ],
       language: language_pt_br,

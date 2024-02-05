@@ -53,4 +53,4 @@ class User(db.Model, UserMixin, SkeletonModel):
         return "<User %r>" % self.first_name
     
     def __str__(self):
-        return self.first_name if len(f"{self.first_name} {self.last_name}") > 10 else f"{self.first_name} {self.last_name}"
+        return self.first_name if len(f"{self.first_name} {self.last_name}") > 12 else f"{self.first_name} {self.last_name}"

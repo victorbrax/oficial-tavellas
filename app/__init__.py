@@ -20,6 +20,10 @@ from app.models.reparo.home.m_reparo import Reparo
 from config import DevelopmentConfig
 from database import db
 
+# import logging
+# logging.basicConfig()
+# logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
 # Extensions
 login_manager = LoginManager()
 bcrypt = Bcrypt()

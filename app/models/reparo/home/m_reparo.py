@@ -9,12 +9,12 @@ class Reparo(db.Model, SkeletonModel):
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
-    valor = db.Column(db.Numeric(precision=10, scale=2))
+    preco = db.Column(db.Numeric(precision=10, scale=2))
     qtd_horas = db.Column(db.Integer)
 
-    def __init__(self, nome, valor, qtd_horas):
+    def __init__(self, nome, preco, qtd_horas):
         self.nome = nome
-        self.valor = valor
+        self.preco = preco
         self.qtd_horas = qtd_horas
 
     def __repr__(self):

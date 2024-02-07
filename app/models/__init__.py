@@ -18,6 +18,10 @@ class SkeletonModel:
         model_dict['is_deletable'] = self.is_deletable
         return model_dict
 
+    def flush(self):
+        db.session.flush()
+        return True
+
     def edit(self):
         db.session.commit()
         return True

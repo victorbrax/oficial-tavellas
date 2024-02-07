@@ -74,6 +74,7 @@ def logic_servico(): # Regra de Negócio
                     cliente = forms.cliente.data,
                     bike = forms.bike.data
                     )
+                servico.save() # TODO: Melhorar
                 servico.update_preco_total()
                 servico.save()
                 return jsonify(success=True, message="Servico criado com sucesso.")

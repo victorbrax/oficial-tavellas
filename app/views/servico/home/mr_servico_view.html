@@ -1,8 +1,7 @@
-{% if method == "POST" %}
+{% if method == "POST" or method == "PUT" %}
 
 <div class="modal-header">
-  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <!-- ... (código omitido para brevidade) ... -->
 </div>
 <div class="modal-body">
   <p>{{ modal_data["body"] }}</p>
@@ -28,14 +27,19 @@
     </div>
   </form>
 </div>
+
 <div class="modal-footer">
   <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button class="btn btn-success call-api" data-method="POST" id="xpto" data-dismiss="modal">Inserir</button>
+  {% if method == "POST" %}
+    <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Inserir</button>
+  {% elif method == "PUT" %}
+    <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" data-dismiss="modal">Editar</button>
+  {% endif %}
 </div>
 
 <script> // Script para popular o select de Bikes
-  let cliente_select = document.getElementById("cliente")
-  let bike_select = document.getElementById("bike")
+  let cliente_select = document.getElementById("cliente");
+  let bike_select = document.getElementById("bike");
 
   cliente_select.onchange = function () {
     cliente = cliente_select.value;
@@ -44,51 +48,13 @@
       response.json().then(function(data){
         let bikeOptionHTML = '';
         for (let bike of data.bikes) {
-          bikeOptionHTML += `<option value="`+ bike.id +`">`+bike.id +`. `+ bike.descricao +`</option>`;
+          bikeOptionHTML += `<option value="${bike.id}">${bike.id}. ${bike.descricao}</option>`;
         }
-        bike_select.innerHTML = bikeOptionHTML
+        bike_select.innerHTML = bikeOptionHTML;
       });
-    })
-  }
+    });
+  };
 </script>
-
-
-{% elif method == "PUT" %}
-
-<div class="modal-header">
-  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
-</div>
-<div class="modal-body">
-  <p>{{ modal_data["body"] }}</p>
-
-  <form id="modalForm">
-    {{ forms.hidden_tag() }}
-    {{ forms.csrf_token }}
-    <div class="form-group">
-      <label class="form-label" for="data_inicio">Data de Início:</label>
-      {{ forms.data_inicio(class_="form-control") }}
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="reparos">Reparos:</label>
-      {{ forms.reparos(class_="form-control") }}
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="cliente">Cliente:</label>
-      {{ forms.cliente(class_="form-control") }}
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="bike">Bike:</label>
-      {{ forms.bike(class_="form-control") }}
-    </div>
-  </form>
-</div>
-
-<div class="modal-footer">
-  <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" id="xpto"
-    data-dismiss="modal">Editar</button>
-</div>
 
 {% elif method == "DELETE" %}
 
@@ -104,7 +70,7 @@
   <button data-value="{{ value }}" data-method="DELETE" class="btn btn-danger call-api" id="tbl-btn-delete"
     data-dismiss="modal">Remover</button>
 </div>
-
 {% else %}
 <p>Chamada Inválida.</p>
+
 {% endif %}

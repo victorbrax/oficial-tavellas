@@ -50,6 +50,7 @@ def create_app():
         "auth.accounts",
         "geral.errors",
         "bike.home", # Home
+        "bike.api", # API
         "cliente.home", # Home
         "reparo.home", # Home
         "servico.home", # Home

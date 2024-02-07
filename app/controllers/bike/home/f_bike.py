@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import (IntegerField, StringField, SubmitField, validators)
 from app.models.cliente.home.m_cliente import Cliente
-from wtforms_alchemy import QuerySelectMultipleField
+from wtforms_alchemy import QuerySelectField
 
 class BikeForms(FlaskForm):
     descricao = StringField(validators=[validators.DataRequired()])
@@ -10,10 +10,10 @@ class BikeForms(FlaskForm):
     aro = IntegerField(validators=[validators.DataRequired()])
     quadro = StringField(validators=[validators.DataRequired()])
     cor = StringField(validators=[validators.DataRequired()])
-    clientes = QuerySelectMultipleField('Dono(s)', validators=[validators.DataRequired()]) # https://www.youtube.com/watch?v=d0jR-2UB9Y0
+    cliente = QuerySelectField('Dono', validators=[validators.DataRequired()]) # https://www.youtube.com/watch?v=d0jR-2UB9Y0
     submit = SubmitField()
 
     def __init__(self, *args, **kwargs):
         super(BikeForms, self).__init__(*args, **kwargs)
         # Realizar a consulta ao banco de dados dentro do contexto da aplicação (inicialização).
-        self.clientes.query = Cliente.query.all()
+        self.cliente.query = Cliente.query.all()

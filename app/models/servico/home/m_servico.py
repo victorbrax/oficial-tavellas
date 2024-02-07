@@ -21,15 +21,14 @@ class Servico(db.Model, SkeletonModel):
     bike_id = db.Column(db.Integer, db.ForeignKey('bike.id'))
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servicos', lazy='dynamic'))
+    reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servico', lazy='dynamic'))
     cliente = db.relationship('Cliente', backref=db.backref('servico'))
     bike = db.relationship('Bike', backref=db.backref('servico'))
     usuario = db.relationship('User', backref=db.backref('servico'))
 
-    def __init__(self, data_inicio, data_fim, preco_total, reparos, cliente, bike):
+    def __init__(self, data_inicio, data_fim, reparos, cliente, bike):
         self.data_inicio = data_inicio
         self.data_fim = data_fim
-        self.preco_total = preco_total
         self.reparos = reparos
         self.cliente = cliente
         self.bike = bike
@@ -51,7 +50,7 @@ class Servico(db.Model, SkeletonModel):
         model_dict['usuario'] = f"{self.usuario.first_name} {self.usuario.last_name}"
         return model_dict
     
-    def extra_dict(self):
+    def extra_dict(self): # child rows
         kronik = {}
         kronik['meu_pau'] ="fator_crucial"
         return kronik 

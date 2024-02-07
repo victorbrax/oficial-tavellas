@@ -1,4 +1,3 @@
-from app.models.relationships.t_bike_cliente import bike_cliente
 from database import db
 
 from ... import SkeletonModel
@@ -15,17 +14,19 @@ class Bike(db.Model, SkeletonModel):
     aro = db.Column(db.String(50), nullable=False)
     quadro = db.Column(db.Integer)
     cor = db.Column(db.String(50), nullable=False)
-    
-    clientes = db.relationship('Cliente', secondary=bike_cliente, backref=db.backref('bike', lazy='dynamic'))
 
-    def __init__(self, descricao, modelo, condicao, aro, quadro, cor, clientes):
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+    
+    cliente = db.relationship('Cliente', backref=db.backref('bike'))
+
+    def __init__(self, descricao, modelo, condicao, aro, quadro, cor, cliente):
         self.descricao = descricao
         self.modelo = modelo
         self.condicao = condicao
         self.aro = aro
         self.quadro = quadro
         self.cor = cor
-        self.clientes = clientes
+        self.cliente = cliente
     
     def __repr__(self):
         return "<Bike %r>" % self.id
@@ -36,7 +37,7 @@ class Bike(db.Model, SkeletonModel):
     def to_dict(self):
         model_dict = super().to_dict()
         model_dict['is_reviewed'] = self.is_reviewed
-        model_dict['clientes'] = ", ".join([cliente.nome for cliente in self.clientes])
+        model_dict['cliente'] = self.cliente.nome
         return model_dict
 
     @classmethod

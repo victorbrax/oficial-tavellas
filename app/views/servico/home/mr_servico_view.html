@@ -33,6 +33,26 @@
   <button class="btn btn-success call-api" data-method="POST" id="xpto" data-dismiss="modal">Inserir</button>
 </div>
 
+<script> // Script para popular o select de Bikes
+  let cliente_select = document.getElementById("cliente")
+  let bike_select = document.getElementById("bike")
+
+  cliente_select.onchange = function () {
+    cliente = cliente_select.value;
+
+    fetch('/api/bike/dono/' + cliente).then(function(response) {
+      response.json().then(function(data){
+        let bikeOptionHTML = '';
+        for (let bike of data.bikes) {
+          bikeOptionHTML += `<option value="`+ bike.id +`">`+bike.id +`. `+ bike.descricao +`</option>`;
+        }
+        bike_select.innerHTML = bikeOptionHTML
+      });
+    })
+  }
+</script>
+
+
 {% elif method == "PUT" %}
 
 <div class="modal-header">

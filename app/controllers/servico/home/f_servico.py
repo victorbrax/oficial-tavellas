@@ -14,8 +14,8 @@ class ServicoForms(FlaskForm):
     preco_total = DecimalField('Preço Total', validators=[Optional()])
    
     reparos = QuerySelectMultipleField('Reparo(s)', validators=[validators.DataRequired()]) # https://www.youtube.com/watch?v=d0jR-2UB9Y0
-    cliente = QuerySelectField('Cliente', validators=[validators.DataRequired()])
-    bike = QuerySelectField('Bike', validators=[validators.DataRequired()])
+    cliente = QuerySelectField('Cliente', validators=[validators.DataRequired()], allow_blank=True)
+    bike = QuerySelectField('Bike', validators=[validators.DataRequired()], allow_blank=True)
     submit = SubmitField()
 
     def __init__(self, *args, **kwargs):

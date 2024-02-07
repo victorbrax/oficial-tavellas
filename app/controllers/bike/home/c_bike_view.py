@@ -4,8 +4,7 @@ from flask_login import login_required
 from app.controllers.bike.home.f_bike import BikeForms
 from app.controllers.auth.accounts.utils.protector import role_required
 from app.models.bike.home.m_bike import Bike
-from app.models.cliente.home.m_cliente import Cliente
-from app.models.relationships.t_bike_cliente import bike_cliente
+# from app.models.cliente.home.m_cliente import Cliente
 
 from . import bp
 
@@ -74,7 +73,7 @@ def logic_bike(): # Regra de Negócio
                     aro = forms.aro.data,
                     quadro = forms.quadro.data,
                     cor = forms.cor.data,
-                    clientes = forms.clientes.data
+                    cliente = forms.cliente.data
                     )
                 bike.save()
                 return jsonify(success=True, message="Bike criada com sucesso.")
@@ -90,8 +89,8 @@ def logic_bike(): # Regra de Negócio
                 bike.aro = forms.aro.data
                 bike.quadro = forms.quadro.data
                 bike.cor = forms.cor.data
-                bike.clientes.clear()
-                bike.clientes.extend(forms.clientes.data)
+                bike.cliente.clear()
+                bike.cliente.extend(forms.cliente.data)
                 bike.edit()
                 return jsonify(success=True, message="Bike editada com sucesso.")
             else:

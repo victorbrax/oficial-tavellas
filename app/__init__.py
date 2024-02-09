@@ -6,6 +6,7 @@ from flask_babel import Babel, format_datetime
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_migrate import Migrate
 
 from app.models.auth.m_user import User
 from app.models.auth.m_role import Role
@@ -30,6 +31,7 @@ bcrypt = Bcrypt()
 babel = Babel()
 mail = Mail()
 admin = Admin(name="Controle CIC", template_mode="bootstrap3")
+migrate = Migrate()
 
 def get_locale():
     return 'pt_BR'
@@ -70,6 +72,7 @@ def create_app():
     login_manager.init_app(app=app)
     mail.init_app(app=app)
     bcrypt.init_app(app=app)
+    migrate.init_app(app=app, db=db)
 
     with app.app_context(): #! It is important that you import your models after initializing the db object since.
         db.create_all()

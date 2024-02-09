@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% block title %}Bikes{% endblock %}
+{% block title %}Reparos{% endblock %}
 {% block head %}{% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
     <tr>
       <th>ID</th>
       <th>Nome</th>
-      <th>Valor</th>
+      <th>Preço</th>
       <th>QTD de Horas</th>
       <th>Ações</th>
     </tr>
@@ -30,7 +30,7 @@
       columns: [
         { data: 'id' },
         { data: 'nome' },
-        { data: 'valor' },
+        { data: 'preco' },
         { data: 'qtd_horas' },
         { data: null, orderable: false, render: renderButtons }
       ],

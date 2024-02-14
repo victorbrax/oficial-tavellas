@@ -4,6 +4,6 @@ from wtforms import (DecimalField, IntegerField, StringField, SubmitField, valid
 
 class ReparoForms(FlaskForm):
     nome = StringField(validators=[validators.DataRequired()])
-    valor = DecimalField(validators=[validators.DataRequired()])
+    preco = DecimalField(validators=[validators.DataRequired()])
     qtd_horas = IntegerField(validators=[validators.DataRequired()])
     submit = SubmitField()

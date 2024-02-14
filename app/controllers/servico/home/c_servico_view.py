@@ -72,7 +72,8 @@ def logic_servico(): # Regra de Negócio
                     data_fim = forms.data_fim.data,
                     reparos = forms.reparos.data,
                     cliente = forms.cliente.data,
-                    bike = forms.bike.data
+                    bike = forms.bike.data,
+                    status = "Em Andamento"
                     )
                 servico.flush() # TODO: Melhorar
                 servico.update_preco_total()

@@ -45,7 +45,7 @@ class User(db.Model, UserMixin, SkeletonModel):
     
     def has_role(self, role):
         user_roles = [role.name for role in self.roles]
-        if role in user_roles or "admin" in user_roles:
+        if role in user_roles or "admin" in user_roles or "god" in user_roles:
             return True
         return False
 

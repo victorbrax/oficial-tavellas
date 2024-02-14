@@ -2,11 +2,11 @@ from importlib import import_module
 
 from flask import Flask, g
 from flask_admin import Admin
-from flask_babel import Babel, format_datetime
+from flask_babel import Babel
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_migrate import Migrate
+
 
 from app.models.auth.m_user import User
 from app.models.auth.m_role import Role
@@ -31,7 +31,6 @@ bcrypt = Bcrypt()
 babel = Babel()
 mail = Mail()
 admin = Admin(name="Controle CIC", template_mode="bootstrap3")
-migrate = Migrate()
 
 def get_locale():
     return 'pt_BR'
@@ -39,6 +38,8 @@ def get_locale():
 def create_app():
     app = Flask(__name__, template_folder="views", static_folder="public")
     app.config.from_object(DevelopmentConfig)
+
+    from .controllers.auth.accounts.utils.boot import create_god_role, create_thor_user
 
     # Flask Admin Views
     from .controllers.admin.ao_portal_admin import (ControlAdminView, MainIndexLink, RoleView, UserView)
@@ -72,9 +73,9 @@ def create_app():
     login_manager.init_app(app=app)
     mail.init_app(app=app)
     bcrypt.init_app(app=app)
-    migrate.init_app(app=app, db=db)
 
     with app.app_context(): #! It is important that you import your models after initializing the db object since.
         db.create_all()
-
+        create_god_role()
+        create_thor_user()
     return app

@@ -64,10 +64,11 @@ def logic_reparo(): # Regra de Negócio
 
     match method:
         case "POST":
+            print("chegou no post")
             if forms.validate_on_submit():
                 reparo = Reparo(
                     nome = forms.nome.data,
-                    valor = forms.valor.data,
+                    preco = forms.preco.data,
                     qtd_horas = forms.qtd_horas.data,
                     )
                 reparo.save()
@@ -79,7 +80,7 @@ def logic_reparo(): # Regra de Negócio
             reparo = Reparo.query.get(value)
             if forms.validate_on_submit():
                 reparo.nome = forms.nome.data
-                reparo.valor = forms.valor.data
+                reparo.preco = forms.preco.data
                 reparo.qtd_horas = forms.qtd_horas.data
                 reparo.edit()
                 return jsonify(success=True, message="Reparo editado com sucesso.")

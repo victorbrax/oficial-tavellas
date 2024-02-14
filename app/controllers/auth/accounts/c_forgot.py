@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, request, url_for
 from flask_mail import Message
 
-from app import bcrypt, db, mail
+from app import bcrypt, mail
 from app.models.auth.m_user import User
 from .f_accounts import ForgotForm, ForgotResetForm
 

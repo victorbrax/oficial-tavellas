@@ -16,6 +16,7 @@ class Servico(db.Model, SkeletonModel):
     data_inicio = db.Column(db.DateTime)
     data_fim = db.Column(db.DateTime)
     preco_total = db.Column(db.Numeric(10, 2))
+    status  = db.Column(db.String(50))
     
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
     bike_id = db.Column(db.Integer, db.ForeignKey('bike.id'))
@@ -26,12 +27,13 @@ class Servico(db.Model, SkeletonModel):
     bike = db.relationship('Bike', backref=db.backref('servico'))
     usuario = db.relationship('User', backref=db.backref('servico'))
 
-    def __init__(self, data_inicio, data_fim, reparos, cliente, bike):
+    def __init__(self, data_inicio, data_fim, reparos, cliente, bike, status):
         self.data_inicio = data_inicio
         self.data_fim = data_fim
         self.reparos = reparos
         self.cliente = cliente
         self.bike = bike
+        self.status = status
         self.usuario = current_user
 
     def update_preco_total(self):
@@ -46,7 +48,7 @@ class Servico(db.Model, SkeletonModel):
         model_dict = super().to_dict()
         model_dict['is_reviewed'] = self.is_reviewed
         model_dict['reparos'] = ", ".join([reparo.nome for reparo in self.reparos])
-        model_dict['cliente'] = self.cliente.nome
+        model_dict['cliente'] = f"{self.cliente.id}. {self.cliente.nome}"
         model_dict['bike'] = self.bike.descricao
         model_dict['usuario'] = f"{self.usuario.first_name} {self.usuario.last_name}"
         return model_dict

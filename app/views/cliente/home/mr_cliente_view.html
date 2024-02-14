@@ -1,63 +1,4 @@
-{% if method == "POST" %}
-
-<div class="modal-header">
-  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
-</div>
-<div class="modal-body">
-  <p>{{ modal_data["body"] }}</p>
-
-  <form id="modalForm">
-    {{ forms.hidden_tag() }}
-    {{ forms.csrf_token }}
-    <div class="form-group"> 
-      <label class="form-label" for="nome">Nome:</label>
-      {{ forms.nome(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="celular">Celular:</label>
-      {{ forms.celular(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="telefone">Telefone:</label>
-      {{ forms.telefone(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="email">E-mail:</label>
-      {{ forms.email(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="cep">CEP:</label>
-      {{ forms.cep(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="rua">Rua:</label>
-      {{ forms.rua(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="bairro">Bairro:</label>
-      {{ forms.bairro(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="numero">Número:</label>
-      {{ forms.numero(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="cidade">Cidade:</label>
-      {{ forms.cidade(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="estado">Estado:</label>
-      {{ forms.estado(class_="form-control") }}
-    </div>
-  </form>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button class="btn btn-success call-api" data-method="POST" id="xpto" data-dismiss="modal">Inserir</button>
-</div>
-
-{% elif method == "PUT" %}
+{% if method == "POST" or method == "PUT" %}
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
@@ -114,7 +55,11 @@
 
 <div class="modal-footer">
   <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" id="xpto" data-dismiss="modal">Editar</button>
+  {% if method == "POST" %}
+    <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Inserir</button>
+  {% elif method == "PUT" %}
+    <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" data-dismiss="modal">Editar</button>
+  {% endif %}
 </div>
 
 {% elif method == "DELETE" %}

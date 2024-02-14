@@ -1,4 +1,4 @@
-{% if method == "POST" %}
+{% if method == "POST" or method == "PUT" %}
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
@@ -39,56 +39,14 @@
     </div>
   </form>
 </div>
-<div class="modal-footer">
-  <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button class="btn btn-success call-api" data-method="POST" id="xpto" data-dismiss="modal">Inserir</button>
-</div>
-
-{% elif method == "PUT" %}
-
-<div class="modal-header">
-  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
-</div>
-<div class="modal-body">
-  <p>{{ modal_data["body"] }}</p>
-
-  <form id="modalForm">
-    {{ forms.hidden_tag() }}
-    {{ forms.csrf_token }}
-    <div class="form-group"> 
-      <label class="form-label" for="descricao">Descrição:</label>
-      {{ forms.descricao(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="modelo">Modelo:</label>
-      {{ forms.modelo(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="condicao">Condição:</label>
-      {{ forms.condicao(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="aro">Aro:</label>
-      {{ forms.aro(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="quadro">Quadro:</label>
-      {{ forms.quadro(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="cor">Cor:</label>
-      {{ forms.cor(class_="form-control") }}
-    </div>
-      <label class="form-label" for="clientes">Clientes:</label>
-      {{ forms.clientes(class_="form-control") }}
-    </div>
-  </form>
-</div>
 
 <div class="modal-footer">
   <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" id="xpto" data-dismiss="modal">Editar</button>
+  {% if method == "POST" %}
+    <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Inserir</button>
+  {% elif method == "PUT" %}
+    <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" data-dismiss="modal">Editar</button>
+  {% endif %}
 </div>
 
 {% elif method == "DELETE" %}

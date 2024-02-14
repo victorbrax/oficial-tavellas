@@ -1,26 +1,30 @@
 {% extends 'layouts/base-auth.html' %}
-{% block title %}Recuperação de Senha{% endblock %}
-{% block head %}{% endblock %}
+{% block head %}
+<title>Recuperação de Senha</title>
+{% endblock %}
 
 {% block content %}
-  <div class="container main">
-    <div class="row">
-      <div class="col-6 p-0 m-0 side-image">
-        <!-------------      image     ------------->
-        <img src="{{ url_for('static', filename='auth/accounts/images/covabra-logo.png') }}" alt="">
-        <!-- <div class="text"> -->
-          <!-- <p><strong>Portal Covabra</strong></p> -->
-        <!-- </div> -->
+<div class="container main">
+  <div class="row">
+    <div class="col-6 p-0 m-0 side-image wp2">
+      <img src="{{ url_for('static', filename='auth/accounts/images/logotypes/tavellas.png') }}">
+      <div class="image-text">
+        <!-- Melhorar a estilização do texto posteriormente #ISSUE=1 -->
+        <div class="quotes">
+          <p id="left-quote">Mais vale um péssimo dia de trilha<br>do que um ótimo dia de trabalho.<p>
+            <small id="left-quote" style="font-style: italic;">— Pedalante de Mountain.</small>
+        </div>
       </div>
-      <div class="col-md-6 right">
+    </div>
+    <div class="col-md-6 right">
 
-        <div class="input-box">
+      <div class="input-box">
 
           <header>Área de Recuperação</header>
           <div class="auth-text">
             <span>Por favor, forneça o endereço de e-mail associado à sua conta. O <strong>time do CIC</strong> enviará a você um Token de Recuperação.</span>
           </div>
-          <form method="POST" action="{{ url_for('auth.forgot') }}">
+          <form method="POST" action="#">  <!-- {{ url_for('auth.login') }} -->
           {{ form.hidden_tag() }}
           <div class="input-field">
             {{ form.email(class_="input", id_="email", required_="", autocomplete_="off") }}

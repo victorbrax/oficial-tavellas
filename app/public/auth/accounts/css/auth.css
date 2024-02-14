@@ -9,12 +9,31 @@
 }
 
 .side-image {
-    background-image: url("/public/auth/accounts/images/background-auth.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 10px 0 0 10px;
     position: relative;
+}
+
+.wp1 {
+    background-image: url("/public/auth/accounts/images/slide/wallpaper1.jpg");
+}
+.wp2 {
+    background-image: url("/public/auth/accounts/images/slide/wallpaper2.jpg");
+}
+.wp3 {
+    background-image: url("/public/auth/accounts/images/slide/wallpaper3.jpg");
+}
+.wp4 {
+    background-image: url("/public/auth/accounts/images/slide/wallpaper4.jpg");
+}
+.wp5 {
+    background-image: url("/public/auth/accounts/images/slide/wallpaper5.jpg");
 }
 
 .row {
@@ -163,6 +182,10 @@ span a {
 span a:hover {
     text-decoration: underline;
     color: #000;
+}
+
+.quotes {
+    color: white;
 }
 
 @media only screen and (max-width: 768px) {

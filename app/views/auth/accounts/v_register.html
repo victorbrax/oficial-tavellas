@@ -1,23 +1,27 @@
 {% extends 'layouts/base-auth.html' %}
-{% block title %}Registro{% endblock %}
-{% block head %}{% endblock %}
+{% block head %}
+<title>Registro</title>
+{% endblock %}
 
 {% block content %}
-  <div class="container main">
-    <div class="row">
-      <div class="col-6 p-0 m-0 side-image">
-        <!-------------      image     ------------->
-        <img src="{{ url_for('static', filename='auth/accounts/images/covabra-logo.png') }}" alt="">
-        <!-- <div class="text"> -->
-          <!-- <p><strong>Portal Covabra</strong></p> -->
-        <!-- </div> -->
+<div class="container main">
+  <div class="row">
+    <div class="col-6 p-0 m-0 side-image wp3">
+      <img src="{{ url_for('static', filename='auth/accounts/images/logotypes/tavellas.png') }}">
+      <div class="image-text">
+        <!-- Melhorar a estilização do texto posteriormente #ISSUE=1 -->
+        <div class="quotes">
+          <p id="left-quote">Usuários de Speed não são bem-vindos aqui.<p>
+            <small id="left-quote" style="font-style: italic;">— Pedalante de BMX.</small>
+        </div>
       </div>
-      <div class="col-md-6 right">
+    </div>
+    <div class="col-md-6 right">
 
-        <div class="input-box">
+      <div class="input-box">
 
-          <header>Área de Registro</header>
-          <form method="POST" action="{{ url_for('auth.register') }}">
+        <header>Área de Registro</header>
+        <form method="POST" action="{{ url_for('auth.register') }}">
           {{ form.hidden_tag() }}
           <div class="input-field">
             {{ form.first_name(class_="input", id_="first_name", required_="", autocomplete_="off") }}
@@ -46,8 +50,8 @@
             <span>Já tem uma conta? <a href="{{ url_for('auth.login') }}">Entre</a></span>
           </div>
         </form>
-        </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

@@ -278,6 +278,11 @@
   font-weight: 600;
 }
 
+.logotype {
+  display: block !important;
+  height: 2em !important;
+}
+
 /* Responsive Styles */
 
 
@@ -304,4 +309,5 @@
     width: 100%;
     left: 0;
   }
+  
 }

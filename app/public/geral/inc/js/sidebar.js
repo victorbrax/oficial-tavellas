@@ -1,4 +1,4 @@
-let arrow = document.querySelectorAll(".arrow");
+let arrow = document.querySelectorAll(".bi-caret-down-fill");
 for (var i = 0; i < arrow.length; i++) {
   arrow[i].addEventListener("click", (e)=>{
  let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
@@ -7,7 +7,6 @@ for (var i = 0; i < arrow.length; i++) {
 }
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".logotype");
-console.log(sidebarBtn);
 sidebarBtn.addEventListener("click", ()=>{
   sidebar.classList.toggle("close");
 });

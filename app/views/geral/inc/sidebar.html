@@ -1,12 +1,12 @@
 <div class="sidebar close">
   <div class="logo-details">
     <img src="{{ url_for('static', filename='geral/inc/icons/tavellas.svg') }}" class="logotype">
-    <span class="logo_name">Tavella's</span>
+    <span class="logo_name">Tave<span style="color: rgb(255, 208, 0);">ll</span>a's</span>
   </div>
   <ul class="nav-links">
     <li>
       <a href="{{ url_for('home.home') }}">
-        <i class='bx bx-grid-alt'></i>
+        <i class="bi bi-house-fill"></i>
         <span class="link_name">Início</span>
       </a>
       <ul class="sub-menu blank">
@@ -16,28 +16,31 @@
     <li>
       <div class="iocn-link">
         <a href="#">
-          <i class='bx bx-line-chart'></i>
-          <span class="link_name">Aplicações</span>
+          <i class="bi bi-node-plus-fill"></i>
+          <span class="link_name">Registrar</span>
         </a>
-        <i class='bx bxs-chevron-down arrow'></i>
+        <i class="bi bi-caret-down-fill"></i>
       </div>
       <ul class="sub-menu">
-        <li><a class="link_name" href="#">Relatórios</a></li>
-        {% if current_user.is_authenticated and current_user.has_role('financeiro') %}
-        <li><a href="{{ url_for('financeiro.home') }}">Financeiro</a></li>
+        <li><a class="link_name" href="#">Registrar</a></li>
+        {% if current_user.is_authenticated and current_user.has_role('admin') %}
+        <li><a href="{{ url_for('cliente.cliente') }}">Cliente</a></li>
+        <li><a href="{{ url_for('bike.bike') }}">Bike</a></li>
+        <li><a href="{{ url_for('servico.servico') }}">Serviço</a></li>
+        <li><a href="{{ url_for('reparo.reparo') }}">Reparo</a></li>
         {% endif %}
       </ul>
     </li>
     <li>
       <div class="iocn-link">
         <a href="#">
-          <i class='bx bx-spreadsheet'></i>
-          <span class="link_name">Solicitações</span>
+          <i class="bi bi-table"></i>
+          <span class="link_name">Relatórios</span>
         </a>
-        <i class='bx bxs-chevron-down arrow'></i>
+        <i class="bi bi-caret-down-fill"></i>
       </div>
       <ul class="sub-menu">
-        <li><a class="link_name" href="#">Posts</a></li>
+        <li><a class="link_name" href="#">Relatórios</a></li>
         <li><a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=176" target="_blank">Novo
             Relatório</a></li>
         <li><a href="http://10.95.7.120/glpi/plugins/formcreator/front/formdisplay.php?id=178" target="_blank">Acesso a
@@ -57,7 +60,7 @@
           <i class='bx bx-cog'></i>
           <span class="link_name">Configurações</span>
         </a>
-        <i class='bx bxs-chevron-down arrow'></i>
+        <i class="bi bi-caret-down-fill"></i>
       </div>
       <ul class="sub-menu">
         <li><a href="{{ url_for('admin.index') }}">Painel de Administração</a></li>
@@ -66,6 +69,18 @@
       </ul>
     </li>
     {% endif %}
+    {% if current_user.is_authenticated and current_user.has_role('admin') %}
+    <li>
+      <a href="{{ url_for('home.home') }}">
+        <i class="bi bi-flag-fill"></i>
+        <span class="link_name">Suporte</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="{{ url_for('home.home') }}">Suporte</a></li>
+      </ul>
+    </li>
+    <li>
+    {% endif %}
     <li>
       <div class="profile-details">
         <div class="profile-content">
@@ -73,9 +88,9 @@
         </div>
         <div class="name-job">
           <div class="profile_name">{{ current_user }}</div>
-          <div class="job">990576</div>
+          <div class="job">{{ current_user.roles[0] }}</div>
         </div>
-        <a href="{{ url_for('auth.logout') }}"><i class='bx bx-log-out'></i></a>
+        <a href="{{ url_for('auth.logout') }}"><i class="bi bi-box-arrow-left"></i></a>
       </div>
     </li>
   </ul>

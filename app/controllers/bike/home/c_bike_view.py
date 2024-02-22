@@ -12,7 +12,7 @@ from . import bp
 @bp.route("/view")
 @login_required
 @role_required(["admin"])
-def author():
+def bike():
     return render_template("bike/home/v_bike_view.html")
 
 @bp.route('/data_bike')

@@ -84,6 +84,7 @@
 .sidebar .nav-links li i {
   height: 50px;
   min-width: 78px;
+  display: block;
   text-align: center;
   line-height: 50px;
   color: #fff;
@@ -92,11 +93,11 @@
   transition: all 0.3s ease;
 }
 
-.sidebar .nav-links li.showMenu i.arrow {
+.sidebar .nav-links li.showMenu i.bi-caret-down-fill {
   transform: rotate(-180deg);
 }
 
-.sidebar.close .nav-links i.arrow {
+.sidebar.close .nav-links i.bi-caret-down-fill {
   display: none;
 }
 

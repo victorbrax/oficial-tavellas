@@ -2,12 +2,12 @@ from app.models.auth.m_role import Role
 from app.models.auth.m_user import User
 from app import bcrypt
 
-def create_god_role():
-    god_role = Role.query.filter_by(name="god").first()
+def create_dog_role():
+    dog_role = Role.query.filter_by(name="dog").first()
 
-    if not god_role:
-        god = Role(name="god", description="Super Ausuário")
-        god.save()
+    if not dog_role:
+        dog = Role(name="dog", description="Super Ausuário")
+        dog.save()
 
 def create_thor_user():
     thor_user = User.query.filter_by(email="thor@tavellas.com.br").first()
@@ -19,7 +19,7 @@ def create_thor_user():
             last_name="Tavellas",
             active=True
         )
-        super_role = Role.query.filter_by(name="god").first()
+        super_role = Role.query.filter_by(name="dog").first()
 
         super_thor.roles.append(super_role)
         super_thor.save()

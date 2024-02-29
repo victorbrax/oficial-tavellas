@@ -39,7 +39,7 @@ def create_app():
     app = Flask(__name__, template_folder="views", static_folder="public")
     app.config.from_object(DevelopmentConfig)
 
-    from .controllers.auth.accounts.utils.boot import create_god_role, create_thor_user
+    from .controllers.auth.accounts.utils.boot import create_dog_role, create_thor_user
 
     # Flask Admin Views
     from .controllers.admin.ao_portal_admin import (ControlAdminView, MainIndexLink, RoleView, UserView)
@@ -76,6 +76,6 @@ def create_app():
 
     with app.app_context(): #! It is important that you import your models after initializing the db object since.
         db.create_all()
-        create_god_role()
+        create_dog_role()
         create_thor_user()
     return app

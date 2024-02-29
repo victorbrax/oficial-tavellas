@@ -21,9 +21,9 @@
 
 /* Estilos para os botões de ação da tabela */
 .btn-tbl {
-    padding: 4px;
-    margin: 2px;
-    font-size: 20px;
+    padding: 3px 5px;
+    margin: 0px 2px;
+    font-size: 16px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.697); /* Sombra do texto */
     caret-color: transparent;
     background-color: #000000; /* Cor de fundo */
@@ -31,13 +31,14 @@
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.697); /* Sombra */
     border-radius: 7px; /* Borda arredondada */
     cursor: pointer;
+    display: inline-block;
 }
 
 /* Estilos para os ícones quando passa o mouse por cima */
 .btn-tbl:hover {
     background-color: #050313; /* Cor de fundo */
     opacity: 0.7;
-    color: aliceblue; /* Cor do texto */
+    color: rgb(253, 255, 240); /* Cor do texto */
     animation: pulse 0.5s infinite alternate; /* Animação pulsante */
 }
 
@@ -46,6 +47,7 @@
     margin: 0px 15px 0px 0px;
     padding: 5px;
     font-size: 18px;
+    font-style: normal;
 }
 
 #table-btn-create span {
@@ -56,28 +58,28 @@
 }
 
 /* Cores dos ícones específicos */
-.bxs-plus-circle {
+.bi-plus-circle-fill {
     color: rgb(42, 255, 78);
 }
 
-.bxs-edit-alt {
+.bi-pencil-fill {
     color: rgb(255, 196, 0);
 }
 
-.bxs-trash {
+.bi-trash3-fill {
     color: rgb(218, 30, 30);
 }
 
-.bxs-check-square {
-    color: rgb(89, 97, 255);
+.bi-arrow-up-square-fill {
+    color: rgb(26, 66, 175);
 }
 
 /* Animação pulsante */
-@keyframes pulse {
+@keyframes pulse  {
     0% {
-        transform: scale(1);
+        transform: scale(1.0);
     }
     100% {
-        transform: scale(1.07);
+        transform: scale(1.05);
     }
 }

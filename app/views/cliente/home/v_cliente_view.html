@@ -52,7 +52,7 @@
       initComplete: function(settings, json) { // Função que executa após a requisição AJAX.
         if ('is_createble' in json && json.is_createble) {
         // Adicionar botão de Novo Registro antes do seletor de linhas.
-        $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bx bxs-plus-circle modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
+        $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bi bi-plus-circle-fill modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
         $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
       }
       }
@@ -62,13 +62,13 @@
       var buttons = '';
 
       if (data.is_editable) {
-        buttons += '<i data-value="' + data.id + '" data-method="PUT" class="btn-tbl bx bxs-edit-alt modal-button" id="table-btn-edit"></i>';
+        buttons += '<i data-value="' + data.id + '" data-method="PUT" class="btn-tbl bi bi-pencil-fill modal-button" id="table-btn-edit"></i>';
       }
       if (data.is_deletable) {
-        buttons += '<i data-value="' + data.id + '" data-method="DELETE" class="btn-tbl bx bxs-trash modal-button" id="table-btn-delete"></i>';
+        buttons += '<i data-value="' + data.id + '" data-method="DELETE" class="btn-tbl bi-trash3-fill modal-button" id="table-btn-delete"></i>';
       }
       if (data.is_reviewed) { // Botão que não exige renderização, apenas executa regra de negócio.
-        buttons += '<i data-value="' + data.id + '" data-method="XPTO" class="btn-tbl bx bxs-check-square call-api" id="table-btn-review"></i>';
+        buttons += '<i data-value="' + data.id + '" data-method="XPTO" class="btn-tbl bi bi-arrow-up-square-fill call-api" id="table-btn-review"></i>';
       }
       return buttons;
     }

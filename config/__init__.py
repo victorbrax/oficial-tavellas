@@ -24,6 +24,12 @@ class Config(object):
     MAIL_PASSWORD = "2yNDhV&P"
     
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(base_dir, 'database', 'production.sqlite')
+
+#     @app.before_first_request
+# def before_first_request():
+#     with app.app_context():
+#         db.engine.execute('pragma foreign_keys=on')
+    
     SQLALCHEMY_BINDS = {
         "DEV": 'sqlite:///' + os.path.join(base_dir, 'database', 'development.sqlite')
     }

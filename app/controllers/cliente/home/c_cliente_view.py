@@ -103,7 +103,7 @@ def logic_cliente(): # Regra de Negócio
         case "DELETE":
             cliente = Cliente.query.get(value)
             cliente.delete()
-            return jsonify(success=True, message="cliente deletada com sucesso.")
+            return jsonify(success=True, message="cliente deletado com sucesso.")
 
         case "XPTO":
             cliente = Cliente.query.get(value)

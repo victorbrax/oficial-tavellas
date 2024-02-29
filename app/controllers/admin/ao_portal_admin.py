@@ -15,7 +15,7 @@ class MainIndexLink(MenuLink):
 class ControlAdminView(AdminIndexView): # Herança de AdminIndexView para permitir validação de autenticação.
 
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.has_role("admin")
+        return current_user.is_authenticated and current_user.has_role("Admin")
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for("auth.login"))

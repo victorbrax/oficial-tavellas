@@ -22,7 +22,7 @@ class Servico(db.Model, SkeletonModel):
     bike_id = db.Column(db.Integer, db.ForeignKey('bike.id'))
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servico', lazy='dynamic'))
+    reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servico'))
     cliente = db.relationship('Cliente', backref=db.backref('servico'))
     bike = db.relationship('Bike', backref=db.backref('servico'))
     usuario = db.relationship('User', backref=db.backref('servico'))

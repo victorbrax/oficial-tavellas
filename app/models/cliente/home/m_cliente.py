@@ -20,6 +20,8 @@ class Cliente(db.Model, SkeletonModel):
     cidade = db.Column(db.String(40))
     estado = db.Column(db.String(30))
 
+    bikes = db.relationship('Bike', backref=db.backref('clientes'), passive_deletes=True)
+
     def __init__(self, nome, celular, telefone, email, cep,  rua, bairro, numero, cidade, estado):
         self.nome = nome
         self.celular = celular

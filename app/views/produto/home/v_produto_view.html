@@ -1,23 +1,17 @@
 {% extends 'layouts/base.html' %}
-{% block title %}Serviços{% endblock %}
+{% block title %}Produtos{% endblock %}
 {% block head %}{% endblock %}
 
 {% block content %}
-<h1>Serviços</h1>
-</button>
+<h1>Produtos</h1>
 <table id="data" class="table table-striped" style="width:100%">
-  
   <thead>
     <tr>
       <th>ID</th>
-      <th>Bicicleta</th>
-      <th>Data de Início</th>
-      <th>Data de Término</th>
-      <th>Reparos</th>
-      <th>Usuário</th>
-      <th>Cliente</th>
-      <th>Preço Total</th>
-      <th>Status</th>
+      <th>Nome</th>
+      <th>Marca</th>
+      <th>Preço</th>
+      <th>Local</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -32,51 +26,25 @@
 
   $(document).ready(function () {
     $('#data').DataTable({ // Carregar a tabela com AJAX
-      ajax: '{{ url_for("servico.data_servico") }}',
-      columnDefs: [
-      { "width": "12%", "targets": [-1, -2], "className": "text-center" },
-    ],
+      ajax: '{{ url_for("produto.data_produto") }}',
+      columnDefs: [{ "width": "12%", "targets": -1 }],
       columns: [
         { data: 'id' },
-        { data: 'bike' },
-        { data: 'data_inicio', render: DataTable.render.datetime('DD/MM/YYYY - HH:mm') },
-        { data: 'data_fim', render: DataTable.render.datetime('DD/MM/YYYY - HH:mm') },
-        { data: 'reparos' },
-        { data: 'usuario' },
-        { data: 'cliente' },
-        { data: 'preco_total' },
-        {
-          data: 'status',
-          render: function (data, type, row) {
-            return '<span style="color: aliceblue;" class="badge bg-' + getStatusBadgeClass(data) + '">' + data + '</span>';
-          }
-        },
+        { data: 'nome' },
+        { data: 'marca' },
+        { data: 'preco' },
+        { data: 'local' },
         { data: null, orderable: false, render: renderButtons }
       ],
       language: language_pt_br,
-      initComplete: function (settings, json) { // Função que executa após a requisição AJAX.
+      initComplete: function(settings, json) { // Função que executa após a requisição AJAX.
         if ('is_createble' in json && json.is_createble) {
-          // Adicionar botão de Novo Registro antes do seletor de linhas.
-          $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bi bi-plus-circle-fill modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
-          $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
-        }
+        // Adicionar botão de Novo Registro antes do seletor de linhas.
+        $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bi bi-plus-circle-fill modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
+        $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
+      }
       }
     });
-    
-    function getStatusBadgeClass(status) {
-      switch(status) {
-        case 'Aguardando Pagamento':
-          return 'danger';
-        case 'Aguardando Aprovação':
-          return 'secondary';
-        case 'Em Andamento':
-          return 'warning';
-        case 'Finalizado':
-          return 'success';
-        case 'Novo':
-          return 'primary';
-      }
-    }
 
     function renderButtons(data, type, row) { // Lógica para renderizar ou não os botões.
       var buttons = '';
@@ -93,7 +61,7 @@
 
   function modalChoice(method, value) { // Fazer com que os botões renderizem o modal desejado.
     $.ajax({
-      url: '{{ url_for("servico.render_servico") }}?method=' + method + '&value=' + value,
+      url: '{{ url_for("produto.render_produto") }}?method=' + method + '&value=' + value,
       type: 'GET',
       success: function (data) {
         $('.modal-content').html(data);
@@ -101,10 +69,10 @@
       }
     });
   }
-
+    
   function submitAPI(method, value, data) { // Fazer com que os botões renderizem o modal desejado.
     $.ajax({
-      url: '{{ url_for("servico.logic_servico") }}?method=' + method + '&value=' + value,
+      url: '{{ url_for("produto.logic_produto") }}?method=' + method + '&value=' + value,
       type: 'POST',
       data: data,
       success: function () {

@@ -3,22 +3,24 @@ from database import db
 from ... import SkeletonModel
 
 
-class Reparo(db.Model, SkeletonModel):
-    __tablename__ = "reparo"
+class Produto(db.Model, SkeletonModel):
+    __tablename__ = "produto"
     # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
+    marca = db.Column(db.String(150), nullable=False)
     preco = db.Column(db.Numeric(precision=10, scale=2))
-    qtd_horas = db.Column(db.Integer)
+    local = db.Column(db.Integer)
 
-    def __init__(self, nome, preco, qtd_horas):
+    def __init__(self, nome, preco, marca, local):
         self.nome = nome
+        self.marca = marca
         self.preco = preco
-        self.qtd_horas = qtd_horas
+        self.local = local
 
     def __repr__(self):
-        return "<Reparo %r>" % self.id
+        return "<Produto %r>" % self.id
     
     def __str__(self):
         return f"{self.id}. {self.nome}"

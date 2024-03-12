@@ -1,0 +1,37 @@
+{% if method == "POST" %}
+
+<div class="modal-header">
+  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
+  <i type="button" class="close bx bx-x" data-dismiss="modal"
+    style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+</div>
+<div class="modal-body">
+  <p>{{ modal_data["body"] }}</p>
+</div>
+</form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" data-dismiss="modal">Não</button>
+  <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Sim</button>
+</div>
+
+{% elif method == "DELETE" %}
+
+<div class="modal-header">
+  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
+  <i type="button" class="close bx bx-x" data-dismiss="modal"
+    style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+</div>
+<div class="modal-body">
+  <p>{{ modal_data["body"] }}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" data-dismiss="modal">Não</button>
+  <button data-value="{{ value }}" data-method="DELETE" class="btn btn-danger call-api" id="tbl-btn-delete"
+    data-dismiss="modal">Sim</button>
+</div>
+
+{% else %}
+<p>Chamada Inválida.</p>
+{% endif %}

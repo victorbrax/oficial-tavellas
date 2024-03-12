@@ -18,7 +18,7 @@ from app.models.admin.exemplares.m_author_books import authors_books
 
 from app.models.reparo.home.m_reparo import Reparo
 
-from config import DevelopmentConfig
+from config import ProductionConfig
 from database import db
 
 # import logging
@@ -37,7 +37,7 @@ def get_locale():
 
 def create_app():
     app = Flask(__name__, template_folder="views", static_folder="public")
-    app.config.from_object(DevelopmentConfig)
+    app.config.from_object(ProductionConfig)
 
     from .controllers.auth.accounts.utils.boot import create_dog_role, create_thor_user
 
@@ -50,10 +50,12 @@ def create_app():
     blueprints_to_import = [
         "home.inicio",
         "admin.exemplares",
+        "admin.backup",
         "auth.accounts",
         "geral.errors",
         "bike.home", # Home
         "bike.api", # API
+        "produto.home", # Home
         "cliente.home", # Home
         "reparo.home", # Home
         "servico.home", # Home

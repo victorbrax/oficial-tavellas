@@ -64,7 +64,6 @@ def logic_reparo(): # Regra de Negócio
 
     match method:
         case "POST":
-            print("chegou no post")
             if forms.validate_on_submit():
                 reparo = Reparo(
                     nome = forms.nome.data,

@@ -7,6 +7,8 @@ load_dotenv(env)
 # Define o diretório base do aplicativo Flask
 base_dir = os.getcwd()
 APP_PATH = os.path.join(base_dir, "app")
+DATABASE_PATH = os.path.join(base_dir, "database")
+BACKUP_PATH = os.path.join(DATABASE_PATH, "backup")
 MODELS_PATH = os.path.join(APP_PATH, "models")
 VIEWS_PATH = os.path.join(APP_PATH, "views")
 CONTROLLERS_PATH = os.path.join(APP_PATH, "controllers")
@@ -23,7 +25,8 @@ class Config(object):
     MAIL_USERNAME = "cic@covabra.com.br"
     MAIL_PASSWORD = "2yNDhV&P"
     
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(base_dir, 'database', 'production.sqlite')
+    DB_NAME = "tavellasprod.sqlite"
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(DATABASE_PATH, DB_NAME)
 
 #     @app.before_first_request
 # def before_first_request():
@@ -31,7 +34,7 @@ class Config(object):
 #         db.engine.execute('pragma foreign_keys=on')
     
     SQLALCHEMY_BINDS = {
-        "DEV": 'sqlite:///' + os.path.join(base_dir, 'database', 'development.sqlite')
+        "DEV": 'sqlite:///' + os.path.join(DATABASE_PATH, 'development.sqlite')
     }
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -43,4 +46,6 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 class ProductionConfig(Config):
-    FLASK_ENV = "production"
+    FLASK_ENV = "development"
+    DEBUG = True
+    # FLASK_ENV = "production"

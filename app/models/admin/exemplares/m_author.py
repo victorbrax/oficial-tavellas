@@ -6,7 +6,7 @@ from ... import SkeletonModel
 
 class Author(db.Model, SkeletonModel):
     __tablename__ = "author"
-    __bind_key__ = "DEV"
+    # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)

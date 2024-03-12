@@ -11,7 +11,7 @@ from .. import SkeletonModel
 
 class User(db.Model, UserMixin, SkeletonModel):
     __tablename__ = "user"
-    __bind_key__ = "DEV"
+    # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(255))

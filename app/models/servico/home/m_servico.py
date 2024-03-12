@@ -10,7 +10,7 @@ from ... import SkeletonModel
 
 class Servico(db.Model, SkeletonModel):
     __tablename__ = "servico"
-    __bind_key__ = "DEV"
+    # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
     data_inicio = db.Column(db.DateTime)
@@ -18,16 +18,15 @@ class Servico(db.Model, SkeletonModel):
     preco_total = db.Column(db.Numeric(10, 2))
     status  = db.Column(db.String(50))
     
-    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
-    bike_id = db.Column(db.Integer, db.ForeignKey('bike.id'))
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id', onupdate='CASCADE', ondelete="CASCADE"))
+    bike_id = db.Column(db.Integer, db.ForeignKey('bike.id', onupdate='CASCADE', ondelete="CASCADE"))
+
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servico'))
-    cliente = db.relationship('Cliente', backref=db.backref('servico'))
-    bike = db.relationship('Bike', backref=db.backref('servico'))
+    reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servico'), passive_deletes=True)
     usuario = db.relationship('User', backref=db.backref('servico'))
 
-    def __init__(self, data_inicio, data_fim, reparos, cliente, bike, status):
+    def __init__(self, cliente, data_inicio, data_fim, bike, status, reparos):
         self.data_inicio = data_inicio
         self.data_fim = data_fim
         self.reparos = reparos

@@ -12,7 +12,7 @@ from . import bp
 @login_required
 @role_required(["admin"])
 def servico():
-    return render_template("Servico/home/v_servico_view.html")
+    return render_template("servico/home/v_servico_view.html")
 
 @bp.route('/data_servico')
 @login_required
@@ -75,8 +75,8 @@ def logic_servico(): # Regra de Negócio
                     bike = forms.bike.data,
                     status = "Em Andamento"
                     )
-                servico.flush() # TODO: Melhorar
                 servico.update_preco_total()
+                # servico.flush() # TODO: Melhorar
                 servico.save()
                 return jsonify(success=True, message="Servico criado com sucesso.")
             else:

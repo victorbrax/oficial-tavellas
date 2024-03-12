@@ -5,7 +5,7 @@ from ... import SkeletonModel
 
 class Book(db.Model, SkeletonModel):
     __tablename__ = "book"
-    __bind_key__ = "DEV"
+    # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)

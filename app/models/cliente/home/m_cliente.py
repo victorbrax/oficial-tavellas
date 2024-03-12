@@ -5,7 +5,7 @@ from ... import SkeletonModel
 
 class Cliente(db.Model, SkeletonModel):
     __tablename__ = "cliente"
-    __bind_key__ = "DEV"
+    # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
@@ -20,7 +20,8 @@ class Cliente(db.Model, SkeletonModel):
     cidade = db.Column(db.String(40))
     estado = db.Column(db.String(30))
 
-    bikes = db.relationship('Bike', backref=db.backref('clientes'), passive_deletes=True)
+    bike = db.relationship('Bike', backref=db.backref('cliente'), passive_deletes=True)
+    servico = db.relationship('Servico', backref=db.backref('cliente'), passive_deletes=True)
 
     def __init__(self, nome, celular, telefone, email, cep,  rua, bairro, numero, cidade, estado):
         self.nome = nome

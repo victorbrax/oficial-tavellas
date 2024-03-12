@@ -73,7 +73,7 @@ def logic_bike(): # Regra de Negócio
                     aro = forms.aro.data,
                     quadro = forms.quadro.data,
                     cor = forms.cor.data,
-                    clientes = forms.cliente.data
+                    cliente = forms.cliente.data
                     )
                 bike.save()
                 return jsonify(success=True, message="Bike criada com sucesso.")
@@ -89,7 +89,7 @@ def logic_bike(): # Regra de Negócio
                 bike.aro = forms.aro.data
                 bike.quadro = forms.quadro.data
                 bike.cor = forms.cor.data
-                bike.clientes = forms.cliente.data
+                bike.cliente = forms.cliente.data
                 bike.edit()
                 return jsonify(success=True, message="Bike editada com sucesso.")
             else:

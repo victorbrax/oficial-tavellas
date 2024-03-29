@@ -27,6 +27,7 @@
         <li><a href="{{ url_for('cliente.cliente') }}">Cliente</a></li>
         <li><a href="{{ url_for('bike.bike') }}">Bike</a></li>
         <li><a href="{{ url_for('servico.servico') }}">Serviço</a></li>
+        <li><a href="{{ url_for('produto.produto') }}">Produto</a></li>
         <li><a href="{{ url_for('reparo.reparo') }}">Reparo</a></li>
         {% endif %}
       </ul>
@@ -60,8 +61,6 @@
       <ul class="sub-menu">
         <li><a href="{{ url_for('admin.index') }}">Painel de Administração</a></li>
         <li><a href="{{ url_for('backup.backup') }}">Painel de Backups</a></li>
-        <li><a href="{{ url_for('exemplo.uzuario') }}">Exemplo: Uzuários</a></li>
-        <li><a href="{{ url_for('exemplo.author') }}">Exemplo: Authors</a></li>
       </ul>
     </li>
     {% endif %}

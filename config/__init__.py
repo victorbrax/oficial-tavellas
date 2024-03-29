@@ -21,8 +21,8 @@ class Config(object):
     MAIL_SERVER = "smtp.emailexchangeonline.com"
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_DEFAULT_SENDER = "cic@covabra.com.br" # Alterar para credenciais do aplicativo.
-    MAIL_USERNAME = "cic@covabra.com.br"
+    MAIL_DEFAULT_SENDER = "joaogomespcl@gmail.com" # Alterar para credenciais do aplicativo.
+    MAIL_USERNAME = "joaogomespcl@gmail.com"
     MAIL_PASSWORD = "2yNDhV&P"
     
     DB_NAME = "tavellasprod.sqlite"

@@ -16,6 +16,7 @@ from app.models.admin.exemplares.m_author import Author
 from app.models.admin.exemplares.m_book import Book
 from app.models.admin.exemplares.m_author_books import authors_books
 
+from app.models.produto.home.m_produto import Produto
 from app.models.reparo.home.m_reparo import Reparo
 
 from config import ProductionConfig

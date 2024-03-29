@@ -71,6 +71,7 @@ def logic_servico(): # Regra de Negócio
                     data_inicio = forms.data_inicio.data,
                     data_fim = forms.data_fim.data,
                     reparos = forms.reparos.data,
+                    produtos = forms.produtos.data,
                     cliente = forms.cliente.data,
                     bike = forms.bike.data,
                     status = "Em Andamento"
@@ -88,6 +89,7 @@ def logic_servico(): # Regra de Negócio
                 servico.data_inicio = forms.data_inicio.data
                 servico.data_fim = forms.data_fim.data
                 servico.reparos = forms.reparos.data
+                servico.produtos = forms.produtos.data
                 servico.cliente = forms.cliente.data
                 servico.bike = forms.bike.data
                 servico.update_preco_total()

@@ -5,10 +5,194 @@
 {% endblock %}
 
 {% block content %}
-<h2>Painel Inicial</h2>
+<section class="main">
+    <section class="banner">
+        <!-- Banner Principal -->
+        <h3>Painel Inicial</h3>
+        <span>Veja os indicadores do mês.</span>
 
+        <div class="banner-content">
+            <div class="banner-title">
+                <p>Março</p>
+            </div>
+            <div class="banner-text">
+                <h3>Evite que mais placas como essa apareçam...</h3>
+                <h5>Qual leão iremos matar hoje?</h5>
+            </div>
+            <!-- Indicators Container -->
+            <div class="banner-graphs">
+                <div class="graph">
+                    <div class="graph-icon" style="background-color: #700b1e;">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                    <div class="graph-content">
+                        <span>Serviços Ativos</span>
+                        <h2>9</h2>
+                    </div>
+                </div>
+                <div class="graph">
+                    <div class="graph-icon" style="background-color: #e19d2a;">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="graph-content">
+                        <span>Clientes Novos</span>
+                        <h2>290</h2>
+                    </div>
+                </div>
 
+                <div class="graph">
+                    <div class="graph-icon" style="background-color: #073a82;">
+                        <i class="bi bi-bicycle"></i>
+                    </div>
+                    <div class="graph-content">
+                        <span>Bikes Novas</span>
+                        <h2>241</h2>
+                    </div>
+                </div>
 
+                <div class="graph">
+                    <div class="graph-icon" style="background-color: #7c3b8a;">
+                        <i class="bi bi-box-seam-fill"></i>
+                    </div>
+                    <div class="graph-content">
+                        <span>Produtos Disponíveis</span>
+                        <h2>56</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="buttons">
+        <h3>Atalhos</h3>
+        <span>Ferramentas para o dia a dia.</span>
+        <!-- Banner Secundário -->
+        <div class="menus">
+            <!-- Duplo -->
+            <div class="double-menu">
+                    <a href="#" class="sub-menu double-button dm-1">
+                        <div class="button-content">
+                            <div class="button-icon">
+                                <i class="bi bi-coin"></i>
+                            </div>
+                            <div class="button-text">
+                                <span>Criar Serviço</span>
+                                <h1>129</h1>
+                            </div>
+                        </div>
+                    </a>
+                <a href="#" class="sub-menu double-button dm-2">
+                    <div class="button-content">
+                        <div class="button-icon">
+                            <i class="bi bi-file-person"></i>
+                        </div>
+                        <div class="button-text">
+                            <span>Criar Cliente</span>
+                            <h1>129</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Único -->
+            <div class="unique-menu">
+                <div class="sub-menu unique-button u-1">
+                    <div class="sub-menu-title">
+                        <div class="menu-title">
+                            <h2>Registrar</h2>
+                        </div>
+                    </div>
+                    <div class="sub-menu-items">
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-person-plus-fill"></i></div>
+                                <div class="menu-item-text"><p>Cliente</p></div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-gear-wide-connected"></i></div>
+                                <div class="menu-item-text"><p>Bike</p></div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-bag-check-fill"></i></div>
+                                <div class="menu-item-text"><p>Produto</p></div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-tools"></i></div>
+                                <div class="menu-item-text"><p>Reparo</p></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Duplo -->
+            <div class="double-menu">
+                <a href="#" class="sub-menu double-button dm-3">
+                    <div class="button-content">
+                        <div class="button-icon">
+                            <i class="bi bi-bicycle"></i>
+                        </div>
+                        <div class="button-text">
+                            <span>Criar Bike</span>
+                            <h1>129</h1>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="sub-menu double-button dm-4">
+                    <div class="button-content">
+                        <div class="button-icon">
+                            <i class="bi bi-hypnotize"></i>
+                        </div>
+                        <div class="button-text">
+                            <span>Criar Produto</span>
+                            <h1>129</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Único -->
+            <div class="unique-menu">
+                <div class="sub-menu unique-button u-2">
+                    <div class="sub-menu-title">
+                        <div class="menu-title">
+                            <h2>Gestão</h2>
+                        </div>
+                    </div>
+                    <div class="sub-menu-items">
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-person-standing"></i></div>
+                                <div class="menu-item-text"><p>Usuários</p></div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-diagram-3-fill"></i></i></div>
+                                <div class="menu-item-text"><p>Cargos</p></div>
+                            </a href="#">
+                        </div>
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-floppy2-fill"></i></div>
+                                <div class="menu-item-text"><p>Backups</p></div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="#" class="item-wrapper">
+                                <div class="menu-item-icon"><i class="bi bi-chat-square-text-fill"></i></div>
+                                <div class="menu-item-text"><p>Suporte</p></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
 {% endblock %}
 
 {% block scripts %}

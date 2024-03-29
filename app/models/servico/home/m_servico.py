@@ -2,7 +2,9 @@ from flask_login import current_user
 from sqlalchemy.sql import func
 
 from app.models.reparo.home.m_reparo import Reparo
+from app.models.produto.home.m_produto import Produto
 from app.models.relationships.t_reparo_servico import reparo_servico
+from app.models.relationships.t_produto_servico import produto_servico
 from database import db
 
 from ... import SkeletonModel
@@ -23,30 +25,38 @@ class Servico(db.Model, SkeletonModel):
 
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    produtos = db.relationship('Produto', secondary=produto_servico, backref=db.backref('servico'), passive_deletes=True)
     reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servico'), passive_deletes=True)
     usuario = db.relationship('User', backref=db.backref('servico'))
 
-    def __init__(self, cliente, data_inicio, data_fim, bike, status, reparos):
+    def __init__(self, cliente, data_inicio, data_fim, bike, status, reparos, produtos):
         self.data_inicio = data_inicio
         self.data_fim = data_fim
         self.reparos = reparos
+        self.produtos = produtos
         self.cliente = cliente
         self.bike = bike
         self.status = status
         self.usuario = current_user
 
     def update_preco_total(self):
-        if self.reparos:
+        total_reparos = 0
+        total_servicos = 0
+
+        if self.reparos:    
             total_reparos = db.session.query(func.coalesce(func.sum(Reparo.preco), 0)).filter(Reparo.id.in_([reparo.id for reparo in self.reparos])).scalar()
-            self.preco_total = total_reparos
-        else:
-            self.preco_total = 0
+
+        if self.produtos:
+            total_servicos = db.session.query(func.coalesce(func.sum(Produto.preco), 0)).filter(Produto.id.in_([produto.id for produto in self.produtos])).scalar()
+
+        self.preco_total = total_reparos + total_servicos
 
 
     def to_dict(self):
         model_dict = super().to_dict()
         model_dict['is_reviewed'] = self.is_reviewed
         model_dict['reparos'] = ", ".join([reparo.nome for reparo in self.reparos])
+        model_dict['produtos'] = ", ".join([produto.nome for produto in self.produtos])
         model_dict['cliente'] = f"{self.cliente.id}. {self.cliente.nome}"
         model_dict['bike'] = self.bike.descricao
         model_dict['usuario'] = f"{self.usuario.first_name} {self.usuario.last_name}"
@@ -54,7 +64,7 @@ class Servico(db.Model, SkeletonModel):
     
     def extra_dict(self): # child rows
         kronik = {}
-        kronik['meu_pau'] ="fator_crucial"
+        kronik['dale'] ="fator_crucial"
         return kronik 
 
     @classmethod

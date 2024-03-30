@@ -45,8 +45,8 @@ def create_app():
     # Flask Admin Views
     from .controllers.admin.ao_portal_admin import (ControlAdminView, MainIndexLink, RoleView, UserView)
     admin.add_link(MainIndexLink(name="Home"))
-    admin.add_view(UserView(User, db.session))
-    admin.add_view(RoleView(Role, db.session))
+    admin.add_view(UserView(User, db.session, url="usuarios", endpoint="users"))
+    admin.add_view(RoleView(Role, db.session, url="cargos", endpoint="roles"))
     
     blueprints_to_import = [
         "home.inicio",

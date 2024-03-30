@@ -19,6 +19,7 @@ class Cliente(db.Model, SkeletonModel):
     complemento = db.Column(db.String(256))
     cidade = db.Column(db.String(40))
     estado = db.Column(db.String(30))
+    data_criacao = db.Column(db.DateTime, server_default=db.func.now())
 
     bike = db.relationship('Bike', backref=db.backref('cliente'), passive_deletes=True)
     servico = db.relationship('Servico', backref=db.backref('cliente'), passive_deletes=True)

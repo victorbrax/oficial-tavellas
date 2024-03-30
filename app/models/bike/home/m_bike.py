@@ -14,6 +14,7 @@ class Bike(db.Model, SkeletonModel):
     aro = db.Column(db.String(50), nullable=False)
     quadro = db.Column(db.Integer)
     cor = db.Column(db.String(50), nullable=False)
+    data_criacao = db.Column(db.DateTime, server_default=db.func.now())
 
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id', onupdate='CASCADE', ondelete="CASCADE"))
 

@@ -7,6 +7,7 @@ from flask_login import current_user
 from app import bcrypt
 
 
+# Fazer com que o Menu de Index tenha um botão para voltar para a Home
 class MainIndexLink(MenuLink):
     def get_url(self):
         return url_for("home.home")

@@ -13,7 +13,7 @@
 
         <div class="banner-content">
             <div class="banner-title">
-                <p>Março</p>
+                <p>{{ home_data['nome_mes'] }}</p>
             </div>
             <div class="banner-text">
                 <h3>Evite que mais placas como essa apareçam...</h3>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="graph-content">
                         <span>Serviços Ativos</span>
-                        <h2>9</h2>
+                        <h2>{{ home_data['servicos_pendentes'] }}</h2>
                     </div>
                 </div>
                 <div class="graph">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="graph-content">
                         <span>Clientes Novos</span>
-                        <h2>290</h2>
+                        <h2>{{ home_data['clientes_do_mes'] }}</h2>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                     </div>
                     <div class="graph-content">
                         <span>Bikes Novas</span>
-                        <h2>241</h2>
+                        <h2>{{ home_data['bikes_do_mes'] }}</h2>
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                     </div>
                     <div class="graph-content">
                         <span>Produtos Disponíveis</span>
-                        <h2>56</h2>
+                        <h2>{{ home_data['produtos_registrados'] }}</h2>
                     </div>
                 </div>
             </div>
@@ -70,25 +70,25 @@
         <div class="menus">
             <!-- Duplo -->
             <div class="double-menu">
-                    <a href="#" class="sub-menu double-button dm-1">
+                    <a href="{{ url_for('servico.servico') }}" class="sub-menu double-button dm-1">
                         <div class="button-content">
                             <div class="button-icon">
                                 <i class="bi bi-coin"></i>
                             </div>
                             <div class="button-text">
                                 <span>Criar Serviço</span>
-                                <h1>129</h1>
+                                <h1>{{ home_data['servicos_registrados'] }}</h1>
                             </div>
                         </div>
                     </a>
-                <a href="#" class="sub-menu double-button dm-2">
+                <a href="{{ url_for('cliente.cliente') }}" class="sub-menu double-button dm-2">
                     <div class="button-content">
                         <div class="button-icon">
                             <i class="bi bi-file-person"></i>
                         </div>
                         <div class="button-text">
                             <span>Criar Cliente</span>
-                            <h1>129</h1>
+                            <h1>{{ home_data['clientes_registrados'] }}</h1>
                         </div>
                     </div>
                 </a>
@@ -103,25 +103,25 @@
                     </div>
                     <div class="sub-menu-items">
                         <div class="menu-item">
-                            <a href="#" class="item-wrapper">
+                            <a href="{{ url_for('cliente.cliente') }}" class="item-wrapper">
                                 <div class="menu-item-icon"><i class="bi bi-person-plus-fill"></i></div>
                                 <div class="menu-item-text"><p>Cliente</p></div>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a href="#" class="item-wrapper">
+                            <a href="{{ url_for('bike.bike') }}" class="item-wrapper">
                                 <div class="menu-item-icon"><i class="bi bi-gear-wide-connected"></i></div>
                                 <div class="menu-item-text"><p>Bike</p></div>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a href="#" class="item-wrapper">
+                            <a href="{{ url_for('produto.produto') }}" class="item-wrapper">
                                 <div class="menu-item-icon"><i class="bi bi-bag-check-fill"></i></div>
                                 <div class="menu-item-text"><p>Produto</p></div>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a href="#" class="item-wrapper">
+                            <a href="{{ url_for('reparo.reparo') }}" class="item-wrapper">
                                 <div class="menu-item-icon"><i class="bi bi-tools"></i></div>
                                 <div class="menu-item-text"><p>Reparo</p></div>
                             </a>
@@ -131,25 +131,25 @@
             </div>
             <!-- Duplo -->
             <div class="double-menu">
-                <a href="#" class="sub-menu double-button dm-3">
+                <a href="{{ url_for('bike.bike') }}" class="sub-menu double-button dm-3">
                     <div class="button-content">
                         <div class="button-icon">
                             <i class="bi bi-bicycle"></i>
                         </div>
                         <div class="button-text">
                             <span>Criar Bike</span>
-                            <h1>129</h1>
+                            <h1>{{ home_data['bikes_registradas'] }}</h1>
                         </div>
                     </div>
                 </a>
-                <a href="#" class="sub-menu double-button dm-4">
+                <a href="{{ url_for('produto.produto') }}" class="sub-menu double-button dm-4">
                     <div class="button-content">
                         <div class="button-icon">
                             <i class="bi bi-hypnotize"></i>
                         </div>
                         <div class="button-text">
                             <span>Criar Produto</span>
-                            <h1>129</h1>
+                            <h1>{{ home_data['produtos_registrados'] }}</h1>
                         </div>
                     </div>
                 </a>
@@ -164,19 +164,19 @@
                     </div>
                     <div class="sub-menu-items">
                         <div class="menu-item">
-                            <a href="#" class="item-wrapper">
+                            <a href="{{ url_for('users.index_view') }}" class="item-wrapper">
                                 <div class="menu-item-icon"><i class="bi bi-person-standing"></i></div>
                                 <div class="menu-item-text"><p>Usuários</p></div>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a href="#" class="item-wrapper">
+                            <a href="{{ url_for('roles.index_view') }}" class="item-wrapper">
                                 <div class="menu-item-icon"><i class="bi bi-diagram-3-fill"></i></i></div>
                                 <div class="menu-item-text"><p>Cargos</p></div>
                             </a href="#">
                         </div>
                         <div class="menu-item">
-                            <a href="#" class="item-wrapper">
+                            <a href="{{ url_for('backup.backup') }}" class="item-wrapper">
                                 <div class="menu-item-icon"><i class="bi bi-floppy2-fill"></i></div>
                                 <div class="menu-item-text"><p>Backups</p></div>
                             </a>

@@ -9,15 +9,17 @@ from database import db
 
 from ... import SkeletonModel
 
+possiveis_status = ["Aguardando Reparo", "Em Andamento", "Aguardando Pagamento", "Finalizado"]
 
 class Servico(db.Model, SkeletonModel):
     __tablename__ = "servico"
     # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
-    data_inicio = db.Column(db.DateTime)
-    data_fim = db.Column(db.DateTime)
+    data_inicio = db.Column(db.Date)
+    data_fim = db.Column(db.Date)
     preco_total = db.Column(db.Numeric(10, 2))
+    
     status  = db.Column(db.String(50))
     
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id', onupdate='CASCADE', ondelete="CASCADE"))
@@ -29,15 +31,29 @@ class Servico(db.Model, SkeletonModel):
     reparos = db.relationship('Reparo', secondary=reparo_servico, backref=db.backref('servico'), passive_deletes=True)
     usuario = db.relationship('User', backref=db.backref('servico'))
 
-    def __init__(self, cliente, data_inicio, data_fim, bike, status, reparos, produtos):
+    
+    def __init__(self, cliente, data_inicio, data_fim, bike, reparos, produtos):
         self.data_inicio = data_inicio
         self.data_fim = data_fim
         self.reparos = reparos
         self.produtos = produtos
         self.cliente = cliente
         self.bike = bike
-        self.status = status
         self.usuario = current_user
+
+    def update_status(self):
+    
+        if self.status is None: # Se o serviço estiver sendo criado, inicialize o status como o primeiro da lista
+            self.status = possiveis_status[0]
+            db.session.commit()
+        else:
+            current_status_index = possiveis_status.index(self.status)
+
+            # Se o status atual não for o último da lista, atualize para o próximo
+            if current_status_index < len(possiveis_status) - 1:
+                self.status = possiveis_status[current_status_index + 1]
+
+
 
     def update_preco_total(self):
         total_reparos = 0
@@ -54,7 +70,7 @@ class Servico(db.Model, SkeletonModel):
 
     def to_dict(self):
         model_dict = super().to_dict()
-        model_dict['is_reviewed'] = self.is_reviewed
+        model_dict['is_updatable'] = self.is_updatable
         model_dict['reparos'] = ", ".join([reparo.nome for reparo in self.reparos])
         model_dict['produtos'] = ", ".join([produto.nome for produto in self.produtos])
         model_dict['cliente'] = f"{self.cliente.id}. {self.cliente.nome}"
@@ -62,11 +78,6 @@ class Servico(db.Model, SkeletonModel):
         model_dict['usuario'] = f"{self.usuario.first_name} {self.usuario.last_name}"
         return model_dict
     
-    def extra_dict(self): # child rows
-        kronik = {}
-        kronik['dale'] ="fator_crucial"
-        return kronik 
-
     @classmethod
     def is_createble(cls):
         return True
@@ -80,5 +91,7 @@ class Servico(db.Model, SkeletonModel):
         return True
     
     @property
-    def is_reviewed(self):
+    def is_updatable(self):
+        if self.status == possiveis_status[-1]:
+            return False
         return True

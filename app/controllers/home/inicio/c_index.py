@@ -30,8 +30,6 @@ def home():
     servicos_registrados = db.session.query(Servico).count()
     servicos_pendentes = db.session.query(Servico).filter(Servico.status == 'Em Andamento').count()
 
-    print(nome_mes)
-
     home_data = {
         "nome_mes": nome_mes,
         "servicos_registrados": servicos_registrados,

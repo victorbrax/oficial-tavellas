@@ -3,6 +3,8 @@ from wtforms import DateField, DecimalField, validators, SubmitField
 from wtforms.validators import InputRequired, Optional
 from wtforms_alchemy import QuerySelectField, QuerySelectMultipleField
 
+from datetime import datetime
+
 from app.models.cliente.home.m_cliente import Cliente
 from app.models.reparo.home.m_reparo import Reparo
 from app.models.produto.home.m_produto import Produto
@@ -10,7 +12,7 @@ from app.models.bike.home.m_bike import Bike
 
 
 class ServicoForms(FlaskForm):
-    data_inicio = DateField('Data de Início', validators=[InputRequired()])
+    data_inicio = DateField('Data de Início', default=datetime.now, validators=[InputRequired()])
     data_fim = DateField('Data de Fim', validators=[Optional()])
     preco_total = DecimalField('Preço Total', validators=[Optional()])
    

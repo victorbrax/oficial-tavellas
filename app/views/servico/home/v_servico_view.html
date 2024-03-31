@@ -40,8 +40,8 @@
       columns: [
         { data: 'id' },
         { data: 'bike' },
-        { data: 'data_inicio', render: DataTable.render.datetime('DD/MM/YYYY - HH:mm') },
-        { data: 'data_fim', render: DataTable.render.datetime('DD/MM/YYYY - HH:mm') },
+        { data: 'data_inicio', render: DataTable.render.date('DD/MM/YYYY') },
+        { data: 'data_fim', render: DataTable.render.date('DD/MM/YYYY') },
         { data: 'reparos' },
         { data: 'produtos' },
         { data: 'usuario' },
@@ -50,7 +50,7 @@
         {
           data: 'status',
           render: function (data, type, row) {
-            return '<span style="color: aliceblue;" class="badge bg-' + getStatusBadgeClass(data) + '">' + data + '</span>';
+            return '<span style="color: #121212;" class="badge bg-' + getStatusBadgeClass(data) + '">' + data + '</span>';
           }
         },
         { data: null, orderable: false, render: renderButtons }
@@ -67,16 +67,14 @@
     
     function getStatusBadgeClass(status) {
       switch(status) {
-        case 'Aguardando Pagamento':
-          return 'danger';
-        case 'Aguardando Aprovação':
+        case 'Aguardando Reparo':
           return 'secondary';
         case 'Em Andamento':
           return 'warning';
+        case 'Aguardando Pagamento':
+          return 'danger';
         case 'Finalizado':
           return 'success';
-        case 'Novo':
-          return 'primary';
       }
     }
 
@@ -89,6 +87,10 @@
       if (data.is_deletable) {
         buttons += '<i data-value="' + data.id + '" data-method="DELETE" class="btn-tbl bi-trash3-fill modal-button" id="table-btn-delete"></i>';
       }
+      if (data.is_updatable) { // Botão que não exige renderização, apenas executa regra de negócio.
+        buttons += '<i data-value="' + data.id + '" data-method="XPTO" class="btn-tbl bi bi-arrow-up-square-fill call-api" id="table-btn-review"></i>';
+      }
+
       return buttons;
     }
   });

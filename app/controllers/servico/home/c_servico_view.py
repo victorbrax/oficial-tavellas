@@ -19,8 +19,7 @@ def servico():
 @role_required(["admin"])
 def data_servico():
     return {'data': [servico.to_dict() for servico in Servico.query], 
-            'is_createble': Servico.is_createble(),
-            'kronik': [servico.extra_dict() for servico in Servico.query]}
+            'is_createble': Servico.is_createble()}
 
 @bp.route('/render_servico', methods=["GET", "POST"])
 @login_required
@@ -62,6 +61,8 @@ def logic_servico(): # Regra de Negócio
     method = request.args.get('method')
     value = request.args.get('value')
 
+
+
     forms = ServicoForms()
 
     match method:
@@ -74,10 +75,10 @@ def logic_servico(): # Regra de Negócio
                     produtos = forms.produtos.data,
                     cliente = forms.cliente.data,
                     bike = forms.bike.data,
-                    status = "Em Andamento"
                     )
-                servico.update_preco_total()
-                # servico.flush() # TODO: Melhorar
+                
+                servico.update_status() # Iniciar o primeiro Status
+                servico.update_preco_total() # Somar os Preços dos Produtos e Reparos do Serviço
                 servico.save()
                 return jsonify(success=True, message="Servico criado com sucesso.")
             else:
@@ -105,7 +106,7 @@ def logic_servico(): # Regra de Negócio
 
         case "XPTO":
             servico = Servico.query.get(value)
-            # servico = servico.swapcase()
+            servico.update_status()
             servico.edit()
             return jsonify(success=True, message="Serviço revisado com sucesso.")
 

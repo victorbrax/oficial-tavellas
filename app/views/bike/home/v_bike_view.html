@@ -26,9 +26,6 @@
 
 {% block scripts %}
 <script>
-  $(document).ready(function(){
-    $('.search-select-box select').selectpicker();
-})
 
   $(document).ready(function () {
     $('#data').DataTable({ // Carregar a tabela com AJAX
@@ -111,7 +108,4 @@
     submitAPI(method, value, data);
   });
 </script>
-
-
-
 {% endblock %}

@@ -10,7 +10,7 @@ class BikeForms(FlaskForm):
     aro = IntegerField(validators=[validators.DataRequired()])
     quadro = StringField(validators=[validators.DataRequired()])
     cor = StringField(validators=[validators.DataRequired()])
-    cliente = QuerySelectField('Dono', validators=[validators.DataRequired()]) # https://www.youtube.com/watch?v=d0jR-2UB9Y0
+    cliente = QuerySelectField('Dono') # https://www.youtube.com/watch?v=d0jR-2UB9Y0
     submit = SubmitField()
 
     def __init__(self, *args, **kwargs):

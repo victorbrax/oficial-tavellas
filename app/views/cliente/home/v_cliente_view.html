@@ -28,8 +28,8 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
 
+<script>
   $(document).ready(function () {
     $('#data').DataTable({ // Carregar a tabela com AJAX
       ajax: '{{ url_for("cliente.data_cliente") }}',
@@ -49,12 +49,12 @@
         { data: null, orderable: false, render: renderButtons }
       ],
       language: language_pt_br,
-      initComplete: function(settings, json) { // Função que executa após a requisição AJAX.
+      initComplete: function (settings, json) { // Função que executa após a requisição AJAX.
         if ('is_createble' in json && json.is_createble) {
-        // Adicionar botão de Novo Registro antes do seletor de linhas.
-        $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bi bi-plus-circle-fill modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
-        $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
-      }
+          // Adicionar botão de Novo Registro antes do seletor de linhas.
+          $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bi bi-plus-circle-fill modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
+          $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
+        }
       }
     });
 
@@ -84,12 +84,13 @@
       }
     });
   }
-    
-  function submitAPI(method, value, data) { // Fazer com que os botões renderizem o modal desejado.
+
+  function submitAPI(method, value, data) {
     $.ajax({
       url: '{{ url_for("cliente.logic_cliente") }}?method=' + method + '&value=' + value,
       type: 'POST',
-      data: data,
+      contentType: 'application/json', // Definindo o tipo de conteúdo como JSON
+      data: JSON.stringify(data), // Convertendo os dados para JSON
       success: function () {
         $('#data').DataTable().ajax.reload();
       }
@@ -105,13 +106,22 @@
   $(document).on('click', '.call-api', function () {
     var method = $(this).data('method') || '';
     var value = $(this).data('value') || 0;
-    var modalForm = $('#modalForm') || 0;
-    if (modalForm.length != 0) {
-      data = modalForm.serializeArray();  // Obter dados do formulário usando serializeArray do jQuery
-    } else {
-      data = [];
+    var forms = document.getElementById('modalForm');
+    if (forms) {
+
+      var formData = new FormData(forms);
+
+      // Converter os dados do formulário para JSON
+      var jsonData = {};
+      formData.forEach(function (value, key) {
+        jsonData[key] = value;
+      });
+
+      submitAPI(method, value, jsonData);
     }
-    submitAPI(method, value, data);
+    else {
+      submitAPI(method, value, {});
+    }
   });
 </script>
 {% endblock %}

@@ -59,56 +59,49 @@ def render_cliente(): # Renderização
 def logic_cliente(): # Regra de Negócio
     method = request.args.get('method')
     value = request.args.get('value')
+    json = request.get_json()
 
-    forms = ClienteForms()
+    nome = json.get('nomeCliente')
+    celular = json.get('celularCliente')
+    telefone = json.get('telefoneCliente')
+    cep = json.get('cepCliente')
+    logradouro = json.get('logradouroCliente')
+    estado = json.get('estadoCliente')
+    cidade = json.get('cidadeCliente')
+    bairro = json.get('bairroCliente')
+    numero = json.get('numeroCliente')
+    complemento = json.get('complementoCliente')
 
     match method:
         case "POST":
-            if forms.validate_on_submit():
-                cliente = Cliente(
-                    nome = forms.nome.data,
-                    celular = forms.celular.data,
-                    email = forms.email.data,
-                    telefone = forms.telefone.data,
-                    cep = forms.cep.data,
-                    rua = forms.rua.data,
-                    bairro = forms.bairro.data,
-                    numero = forms.numero.data,
-                    cidade = forms.cidade.data,
-                    estado = forms.estado.data
-                    )
-                cliente.save()
-                return jsonify(success=True, message="cliente criada com sucesso.")
-            else:
-                print(forms.errors)
+            cliente = Cliente(nome=nome, celular=celular, telefone=telefone, email=nome, cep=cep, rua=logradouro, bairro=bairro, numero=numero, complemento=complemento, estado=estado, cidade=cidade)
+            cliente.save()
+            return jsonify(success=True, message="cliente criada com sucesso.")
         
         case "PUT":
             cliente = Cliente.query.get(value)
-            if forms.validate_on_submit():
-                cliente.nome = forms.nome.data
-                cliente.celular = forms.celular.data
-                cliente.email = forms.email.data
-                cliente.telefone = forms.telefone.data
-                cliente.cep = forms.cep.data
-                cliente.rua = forms.rua.data
-                cliente.bairro = forms.bairro.data
-                cliente.numero = forms.numero.data
-                cliente.cidade = forms.cidade.data
-                cliente.estado = forms.estado.data
-                cliente.edit()
-                return jsonify(success=True, message="cliente editada com sucesso.")
-            else:
-                print(forms.errors)
+            cliente.nome = nome
+            cliente.celular = celular
+            cliente.telefone = telefone
+            cliente.cep = cep
+            cliente.rua = logradouro
+            cliente.bairro = bairro
+            cliente.numero = numero
+            cliente.complemento = complemento
+            cliente.estado = estado
+            cliente.cidade = cidade
+            cliente.edit()
+            return jsonify(success=True, message="cliente editada com sucesso.")
         
         case "DELETE":
             cliente = Cliente.query.get(value)
             cliente.delete()
             return jsonify(success=True, message="cliente deletado com sucesso.")
 
-        case "XPTO":
-            cliente = Cliente.query.get(value)
-            cliente.nome = cliente.nome.swapcase()
-            cliente.edit()
-            return jsonify(success=True, message="cliente revisada com sucesso.")
+        # case "XPTO":
+        #     cliente = Cliente.query.get(value)
+        #     cliente.nome = cliente.nome.swapcase()
+        #     cliente.edit()
+        #     return jsonify(success=True, message="cliente revisada com sucesso.")
 
     return jsonify(success=False, error="Chamada sem condicional.")        

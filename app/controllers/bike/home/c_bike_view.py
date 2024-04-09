@@ -8,7 +8,6 @@ from app.models.bike.home.m_bike import Bike
 
 from . import bp
 
-
 @bp.route("/view")
 @login_required
 @role_required(["admin"])

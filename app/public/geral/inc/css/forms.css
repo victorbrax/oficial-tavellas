@@ -1,0 +1,18 @@
+#messageForms {
+    color: red;
+    font-weight: 800;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.custom-no-spinbox::-webkit-inner-spin-button,
+.custom-no-spinbox::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

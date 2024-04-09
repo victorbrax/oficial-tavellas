@@ -2,63 +2,50 @@
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <span id="messageForms" class="hidden"></span>
+  <i type="button" class="close bx bx-x" data-dismiss="modal"
+    style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
 </div>
 <div class="modal-body">
   <p>{{ modal_data["body"] }}</p>
+  <form method="POST" action="#" id="modalForm" autocomplete="off">
 
-  <form id="modalForm">
-    {{ forms.hidden_tag() }}
-    {{ forms.csrf_token }}
-    <div class="form-group"> 
-      <label class="form-label" for="nome">Nome:</label>
-      {{ forms.nome(class_="form-control") }}
+    <div class="mb-3">
+      <label class="form-label">Identificação do Cliente</label>
+      <input name="nomeCliente" id="nomeCliente" type="text" class="form-control" placeholder="Nome Completo">
+      <div class="form-text">Não se esqueça de anotar o ID do cliente no verso do cartão, <span style="color: chartreuse;">497</span>.</div>
     </div>
-    <div class="form-group"> 
-      <label class="form-label" for="celular">Celular:</label>
-      {{ forms.celular(class_="form-control") }}
+    <label class="form-label">Contato do Cliente</label>
+    <div class="input-group gap-2">
+        <input name="celularCliente" id="celularCliente" type="number" class="form-control custom-no-spinbox" placeholder="Celular">
+        <input name="telefoneCliente" id="telefoneCliente" type="number" class="form-control custom-no-spinbox" placeholder="Telefone">
     </div>
-    <div class="form-group"> 
-      <label class="form-label" for="telefone">Telefone:</label>
-      {{ forms.telefone(class_="form-control") }}
+
+    <label class="form-label">Endereço do Cliente</label>
+    <div class="input-group gap-2">
+        <input name="cepCliente" id="cepCliente" type="number" class="form-control custom-no-spinbox" placeholder="CEP">
+        <input name="complementoCliente" id="complementoCliente" type="text" class="form-control" placeholder="Complemento">
     </div>
-    <div class="form-group"> 
-      <label class="form-label" for="email">E-mail:</label>
-      {{ forms.email(class_="form-control") }}
+
+    <div class="input-group gap-2">
+        <input name="estadoCliente" id="estadoCliente" type="text" class="form-control" placeholder="Estado">
+        <input name="cidadeCliente" id="cidadeCliente" type="text" class="form-control" placeholder="Cidade">
     </div>
-    <div class="form-group"> 
-      <label class="form-label" for="cep">CEP:</label>
-      {{ forms.cep(class_="form-control") }}
+    <input name="bairroCliente" id="bairroCliente" type="text" class="form-control" placeholder="Bairro">
+    <div class="input-group gap-2">
+        <input name="logradouroCliente" id="logradouroCliente" type="text" class="form-control" placeholder="Logradouro">
+        <input name="numeroCliente" id="numeroCliente" type="number" class="form-control custom-no-spinbox" placeholder="Número">
     </div>
-    <div class="form-group"> 
-      <label class="form-label" for="rua">Rua:</label>
-      {{ forms.rua(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="bairro">Bairro:</label>
-      {{ forms.bairro(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="numero">Número:</label>
-      {{ forms.numero(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="cidade">Cidade:</label>
-      {{ forms.cidade(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="estado">Estado:</label>
-      {{ forms.estado(class_="form-control") }}
-    </div>
-  </form>
+</form>
+
 </div>
 
 <div class="modal-footer">
   <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
   {% if method == "POST" %}
-    <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Inserir</button>
+  <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Salvar</button>
   {% elif method == "PUT" %}
-    <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" data-dismiss="modal">Editar</button>
+  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" data-dismiss="modal">Salvar</button>
   {% endif %}
 </div>
 
@@ -73,9 +60,12 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button data-value="{{ value }}" data-method="DELETE" class="btn btn-danger call-api" id="tbl-btn-delete" data-dismiss="modal">Remover</button>
+  <button data-value="{{ value }}" data-method="DELETE" class="btn btn-danger call-api" id="tbl-btn-delete"
+    data-dismiss="modal">Remover</button>
 </div>
 
 {% else %}
 <p>Chamada Inválida.</p>
 {% endif %}
+
+<script src="{{ url_for('static', filename='cliente/home/js/index.js') }}"></script>

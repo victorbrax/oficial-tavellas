@@ -2,41 +2,85 @@
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <span id="messageForms" class="hidden"></span>
-  <i type="button" class="close bx bx-x" data-dismiss="modal"
-    style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <i type="button" class="bi bi-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
 </div>
 <div class="modal-body">
-  <p>{{ modal_data["body"] }}</p>
+  <!-- <p> modal_data["body"]</p> -->
   <form method="POST" action="#" id="modalForm" autocomplete="off">
+    
+    <!-- Nome do Cliente -->
+    <label class="form-label">Identificação do Cliente</label>
+    <div class="row">
+      <div class="col-md-12">
+        <input name="nomeCliente" id="nomeCliente" type="text" class="form-control" placeholder="Nome Completo">
+        <div id="telefoneClienteFeedback" class="invalid-feedback">Por favor, forneça um nome válido.</div>
+        <div class="form-text">Não se esqueça de anotar o ID do cliente no verso do cartão, nº <span style="color: chartreuse;">497</span>.</div>
+      </div>
+    </div>
 
-    <div class="mb-3">
-      <label class="form-label">Identificação do Cliente</label>
-      <input name="nomeCliente" id="nomeCliente" type="text" class="form-control" placeholder="Nome Completo">
-      <div class="form-text">Não se esqueça de anotar o ID do cliente no verso do cartão, <span style="color: chartreuse;">497</span>.</div>
-    </div>
+    <!-- Celular e Telefone do Cliente -->
     <label class="form-label">Contato do Cliente</label>
-    <div class="input-group gap-2">
-        <input name="celularCliente" id="celularCliente" type="number" class="form-control custom-no-spinbox" placeholder="Celular">
-        <input name="telefoneCliente" id="telefoneCliente" type="number" class="form-control custom-no-spinbox" placeholder="Telefone">
+    <div class="row">
+      <div class="col-md-6 pe-1">
+        <input name="celularCliente" id="celularCliente" type="text" class="form-control custom-no-spinbox" placeholder="Celular" class="contatoCliente">
+        <div id="celularClienteFeedback" class="valid-feedback">Esse telefone tem zapzap?.</div>
+        <div id="celularClienteFeedback" class="invalid-feedback">Por favor, forneça um celular válido.</div>
+      </div>
+      <div class="col-md-6 ps-1">
+        <input name="telefoneCliente" id="telefoneCliente" type="text" class="form-control mrcatra" placeholder="Telefone" class="contatoCliente">
+        <div id="telefoneClienteFeedback" class="valid-feedback">Telefone fixo ainda se usa hoje em dia?.</div>
+        <div id="telefoneClienteFeedback" class="invalid-feedback">Por favor, forneça um telefone válida.</div>
+      </div>
     </div>
+
 
     <label class="form-label">Endereço do Cliente</label>
-    <div class="input-group gap-2">
-        <input name="cepCliente" id="cepCliente" type="number" class="form-control custom-no-spinbox" placeholder="CEP">
-        <input name="complementoCliente" id="complementoCliente" type="text" class="form-control" placeholder="Complemento">
+    <!-- CEP e Estado -->
+    <div class="row">
+      <div class="col-md-6 pe-1">
+        <input name="cepCliente" id="cepCliente" type="text" class="form-control custom-no-spinbox" placeholder="CEP" required>
+        <div id="cepClienteFeedback" class="valid-feedback">Bacana! O CEP é válido!</div>
+        <div id="cepClienteFeedback" class="invalid-feedback">Por favor, forneça um CEP válido.</div>
+      </div>
+      
+      <div class="col-md-6 ps-1">
+        <input name="estadoCliente" id="estadoCliente" type="text" class="form-control" placeholder="Estado">
+        <div id="estadoClienteFeedback" class="valid-feedback">Por favor, forneça um Estado válido.</div>
+        <div id="estadoClienteFeedback" class="invalid-feedback">Por favor, forneça um Estado válido.</div>
+      </div>
     </div>
 
-    <div class="input-group gap-2">
-        <input name="estadoCliente" id="estadoCliente" type="text" class="form-control" placeholder="Estado">
-        <input name="cidadeCliente" id="cidadeCliente" type="text" class="form-control" placeholder="Cidade">
+    <!-- Cidade e Bairro -->
+    <div class="row">
+      <div class="col-md-6 pe-1">
+        <input name="cidadeCliente" id="cidadeCliente" type="text" class="form-control" placeholder="Cidade" required>
+        <div id="cidadeClienteFeedback" class="valid-feedback">Forneceu uma cidade válido.</div>
+        <div id="cidadeClienteFeedback" class="invalid-feedback">Por favor, forneça uma cidade válido.</div>
+      </div>
+      
+      <div class="col-md-6 ps-1">
+        <input name="bairroCliente" id="bairroCliente" type="text" class="form-control" placeholder="Bairro">
+        <div id="bairroClienteFeedback" class="valid-feedback">Forneceu um bairro válida.</div>
+        <div id="bairroClienteFeedback" class="invalid-feedback">Por favor, forneça uma cidade válida.</div>
+      </div>
     </div>
-    <input name="bairroCliente" id="bairroCliente" type="text" class="form-control" placeholder="Bairro">
-    <div class="input-group gap-2">
+    
+    <!-- Logradouro e Número -->
+    <div class="row">
+      <div class="col-md-8 pe-1">
         <input name="logradouroCliente" id="logradouroCliente" type="text" class="form-control" placeholder="Logradouro">
-        <input name="numeroCliente" id="numeroCliente" type="number" class="form-control custom-no-spinbox" placeholder="Número">
+        <div id="logradouroFeedback" class="valid-feedback">Por favor, forneça um logradouro válido.</div>
+        <div id="logradouroFeedback" class="invalid-feedback">Taa, forneça um logradouro válido.</div>
+      </div>
+      
+      <div class="col-md-4 ps-1">
+        <input name="numeroCliente" id="numeroCliente" type="text" class="form-control custom-no-spinbox" placeholder="Número">
+        <div id="numeroClienteFeedback" class="valid-feedback">vae vae.</div>
+        <div id="numeroClienteFeedback" class="invalid-feedback">Por favor, forneça uma cidade válida.</div>
+      </div>
     </div>
-</form>
+
+  </form>
 
 </div>
 
@@ -45,7 +89,8 @@
   {% if method == "POST" %}
   <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Salvar</button>
   {% elif method == "PUT" %}
-  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" data-dismiss="modal">Salvar</button>
+  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT"
+    data-dismiss="modal">Salvar</button>
   {% endif %}
 </div>
 
@@ -53,7 +98,8 @@
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <i type="button" class="close bx bx-x" data-dismiss="modal"
+    style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
 </div>
 <div class="modal-body">
   <p>{{ modal_data["body"] }}</p>
@@ -67,5 +113,7 @@
 {% else %}
 <p>Chamada Inválida.</p>
 {% endif %}
+<script>
+</script>
 
 <script src="{{ url_for('static', filename='cliente/home/js/index.js') }}"></script>

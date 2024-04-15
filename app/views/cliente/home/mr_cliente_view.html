@@ -2,95 +2,63 @@
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="bi bi-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
 </div>
 <div class="modal-body">
-  <!-- <p> modal_data["body"]</p> -->
-  <form method="POST" action="#" id="modalForm" autocomplete="off">
-    
-    <!-- Nome do Cliente -->
-    <label class="form-label">Identificação do Cliente</label>
-    <div class="row">
-      <div class="col-md-12">
-        <input name="nomeCliente" id="nomeCliente" type="text" class="form-control" placeholder="Nome Completo">
-        <div id="telefoneClienteFeedback" class="invalid-feedback">Por favor, forneça um nome válido.</div>
-        <div class="form-text">Não se esqueça de anotar o ID do cliente no verso do cartão, nº <span style="color: chartreuse;">{{ modal_data["next_client"] }}</span>.</div>
-      </div>
-    </div>
+  <p>{{ modal_data["body"] }}</p>
 
-    <!-- Celular e Telefone do Cliente -->
-    <label class="form-label">Contato do Cliente</label>
-    <div class="row">
-      <div class="col-md-6 pe-1">
-        <input name="celularCliente" id="celularCliente" type="text" class="form-control custom-no-spinbox" placeholder="Celular" class="contatoCliente">
-        <div id="celularClienteFeedback" class="valid-feedback">Não esqueça de conferir se esse celular possui WhatsApp mais tarde!</div>
-        <div id="celularClienteFeedback" class="invalid-feedback">Por favor, forneça um celular válido.</div>
-      </div>
-      <div class="col-md-6 ps-1">
-        <input name="telefoneCliente" id="telefoneCliente" type="text" class="form-control mrcatra" placeholder="Telefone" class="contatoCliente">
-        <div id="telefoneClienteFeedback" class="valid-feedback">Telefone validado com sucesso!</div>
-        <div id="telefoneClienteFeedback" class="invalid-feedback">Por favor, forneça um telefone válida.</div>
-      </div>
+  <form id="modalForm">
+    {{ forms.hidden_tag() }}
+    {{ forms.csrf_token }}
+    <div class="form-group"> 
+      <label class="form-label" for="nome">Nome:</label>
+      {{ forms.nome(class_="form-control") }}
     </div>
-
-
-    <label class="form-label">Endereço do Cliente</label>
-    <!-- CEP e Estado -->
-    <div class="row">
-      <div class="col-md-6 pe-1">
-        <input name="cepCliente" id="cepCliente" type="text" class="form-control custom-no-spinbox" placeholder="CEP" required>
-        <div id="cepClienteFeedback" class="valid-feedback">Bacana! O CEP é válido!</div>
-        <div id="cepClienteFeedback" class="invalid-feedback">Por favor, forneça um CEP válido.</div>
-      </div>
-      
-      <div class="col-md-6 ps-1">
-        <input name="estadoCliente" id="estadoCliente" type="text" class="form-control" placeholder="Estado">
-        <div id="estadoClienteFeedback" class="valid-feedback">Por favor, forneça um Estado válido.</div>
-        <div id="estadoClienteFeedback" class="invalid-feedback">Por favor, forneça um Estado válido.</div>
-      </div>
+    <div class="form-group"> 
+      <label class="form-label" for="celular">Celular:</label>
+      {{ forms.celular(class_="form-control") }}
     </div>
-
-    <!-- Cidade e Bairro -->
-    <div class="row">
-      <div class="col-md-6 pe-1">
-        <input name="cidadeCliente" id="cidadeCliente" type="text" class="form-control" placeholder="Cidade" required>
-        <div id="cidadeClienteFeedback" class="valid-feedback">Forneceu uma cidade válido.</div>
-        <div id="cidadeClienteFeedback" class="invalid-feedback">Por favor, forneça uma cidade válido.</div>
-      </div>
-      
-      <div class="col-md-6 ps-1">
-        <input name="bairroCliente" id="bairroCliente" type="text" class="form-control" placeholder="Bairro">
-        <div id="bairroClienteFeedback" class="valid-feedback">Forneceu um bairro válida.</div>
-        <div id="bairroClienteFeedback" class="invalid-feedback">Por favor, forneça uma cidade válida.</div>
-      </div>
+    <div class="form-group"> 
+      <label class="form-label" for="telefone">Telefone:</label>
+      {{ forms.telefone(class_="form-control") }}
     </div>
-    
-    <!-- Logradouro e Número -->
-    <div class="row">
-      <div class="col-md-8 pe-1">
-        <input name="logradouroCliente" id="logradouroCliente" type="text" class="form-control" placeholder="Logradouro">
-        <div id="logradouroFeedback" class="valid-feedback">Por favor, forneça um logradouro válido.</div>
-        <div id="logradouroFeedback" class="invalid-feedback">Taa, forneça um logradouro válido.</div>
-      </div>
-      
-      <div class="col-md-4 ps-1">
-        <input name="numeroCliente" id="numeroCliente" type="text" class="form-control custom-no-spinbox" placeholder="Número">
-        <div id="numeroClienteFeedback" class="valid-feedback">vae vae.</div>
-        <div id="numeroClienteFeedback" class="invalid-feedback">Por favor, forneça uma cidade válida.</div>
-      </div>
+    <div class="form-group"> 
+      <label class="form-label" for="email">E-mail:</label>
+      {{ forms.email(class_="form-control") }}
     </div>
-
+    <div class="form-group"> 
+      <label class="form-label" for="cep">CEP:</label>
+      {{ forms.cep(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="rua">Rua:</label>
+      {{ forms.rua(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="bairro">Bairro:</label>
+      {{ forms.bairro(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="numero">Número:</label>
+      {{ forms.numero(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="cidade">Cidade:</label>
+      {{ forms.cidade(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="estado">Estado:</label>
+      {{ forms.estado(class_="form-control") }}
+    </div>
   </form>
-
 </div>
 
 <div class="modal-footer">
   <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
   {% if method == "POST" %}
-  <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Salvar</button>
+    <button class="btn btn-success call-api" data-method="POST" data-dismiss="modal">Inserir</button>
   {% elif method == "PUT" %}
-  <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT"
-    data-dismiss="modal">Salvar</button>
+    <button class="btn btn-warning call-api" data-value="{{ value }}" data-method="PUT" data-dismiss="modal">Editar</button>
   {% endif %}
 </div>
 
@@ -98,22 +66,50 @@
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal"
-    style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
 </div>
 <div class="modal-body">
   <p>{{ modal_data["body"] }}</p>
 </div>
 <div class="modal-footer">
   <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-  <button data-value="{{ value }}" data-method="DELETE" class="btn btn-danger call-api" id="tbl-btn-delete"
-    data-dismiss="modal">Remover</button>
+  <button data-value="{{ value }}" data-method="DELETE" class="btn btn-danger call-api" id="tbl-btn-delete" data-dismiss="modal">Remover</button>
+</div>
+
+{% elif method == "DETAIL" %}
+
+<div class="modal-header">
+  <h4 class="modal-title">{{ modal_data["title"] }}</h4>
+  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+</div>
+<div class="modal-body">
+  <p>{{ modal_data["body"] }}</p>
+
+<label>Nome</label>
+<input type="text" class="form-control" value="{{ modal_data['nome'] }}" readonly>
+<label>Data de Adesão</label>
+<input type="text" class="form-control" value="{{ modal_data['data_adesao'] }}" readonly>
+<label>Celular</label>
+<input type="text" class="form-control" value="{{ modal_data['celular'] }}" readonly>
+<label>CEP</label>
+<input type="text" class="form-control" value="{{ modal_data['cep'] }}" readonly>
+<label>Bairro</label>
+<input type="text" class="form-control" value="{{ modal_data['bairro'] }}" readonly>
+<label>Rua</label>
+<input type="text" class="form-control" value="{{ modal_data['rua'] }}" readonly>
+<label>Número</label>
+<input type="text" class="form-control" value="{{ modal_data['numero'] }}" readonly>
+<label>Cidade</label>
+<input type="text" class="form-control" value="{{ modal_data['cidade'] }}" readonly>
+<label>Estado</label>
+<input type="text" class="form-control" value="{{ modal_data['estado'] }}" readonly>  
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+  <a href="https://api.whatsapp.com/send?phone={{ modal_data['celular'] }}&text=Ol%C3%A1,%20estou%20em%20nome%20do%20Tavellas%20Bikes!"><button class="btn btn-success"><i class="bi bi-whatsapp"></i> Whatsapp</button></a>
 </div>
 
 {% else %}
 <p>Chamada Inválida.</p>
 {% endif %}
-<script>
-</script>
-
-<script src="{{ url_for('static', filename='cliente/home/js/index.js') }}"></script>

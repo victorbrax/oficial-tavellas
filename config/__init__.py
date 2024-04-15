@@ -13,6 +13,7 @@ MODELS_PATH = os.path.join(APP_PATH, "models")
 VIEWS_PATH = os.path.join(APP_PATH, "views")
 CONTROLLERS_PATH = os.path.join(APP_PATH, "controllers")
 STATIC_PATH = os.path.join(APP_PATH, "public")
+REPORT_PATH = os.path.join(STATIC_PATH, "report")
 
 class Config(object):
     SECRET_KEY = "c219d4e3-3ea8-4dbb-8641-T4V32LL4S-P0RT4L-3ea8-4dbb-8641-8bbfc644aa18"

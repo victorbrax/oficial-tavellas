@@ -57,7 +57,17 @@
     color: white;
 }
 
+#table-btn-export span {
+    padding-left: 10px;
+    padding-right: 5px;
+    font-size: 20px;
+    color: white;
+}
+
 /* Cores dos ícones específicos */
+.bi-file-earmark-spreadsheet-fill {
+    color: rgb(42, 255, 78);
+}
 .bi-plus-circle-fill {
     color: rgb(42, 255, 78);
 }

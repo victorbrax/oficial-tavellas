@@ -59,6 +59,9 @@
       initComplete: function (settings, json) { // Função que executa após a requisição AJAX.
         if ('is_createble' in json && json.is_createble) {
           // Adicionar botão de Novo Registro antes do seletor de linhas.
+          url_export = '{{ url_for("servico.logic_servico") }}?method=EXPORT';
+          $('.dataTables_length').prepend(`<a href="${url_export}"><i class="btn-tbl bi bi-file-earmark-spreadsheet-fill" id="table-btn-export"><span>Exportar Registro</span></i></a>`);
+          $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
           $('.dataTables_length').prepend('<i data-value="0" data-method="POST" class="btn-tbl bi bi-plus-circle-fill modal-button" id="table-btn-create"><span>Novo Registro</span></i>');
           $('.dataTables_length').appendTo('#data_wrapper .dataTables_length');
         }

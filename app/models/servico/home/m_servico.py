@@ -78,8 +78,25 @@ class Servico(db.Model, SkeletonModel):
         model_dict['usuario'] = f"{self.usuario.first_name} {self.usuario.last_name}"
         return model_dict
     
+    def to_export_xls(self):
+        export_dict = {}
+        export_dict["id_servico"] = self.id
+        export_dict["id_cliente"] = self.cliente.id
+        export_dict["status"] = self.status
+        export_dict["nome_cliente"] = self.cliente.nome
+        export_dict["id_bike"] = self.bike.id
+        export_dict["descricao_bike"] = self.bike.descricao
+        export_dict["data_inicio"] = self.data_inicio
+        export_dict["data_fim"] = self.data_fim
+        export_dict["preco_total"] = self.preco_total
+        return export_dict
+
     @classmethod
     def is_createble(cls):
+        return True
+
+    @classmethod
+    def is_exportable(cls):
         return True
 
     @property

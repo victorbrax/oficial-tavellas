@@ -1,4 +1,9 @@
-from flask import jsonify, render_template, request
+from config import REPORT_PATH
+from flask import jsonify, render_template, request, send_file
+import io
+import uuid
+import os
+import pandas as pd
 from flask_login import login_required
 
 from app.controllers.servico.home.f_servico import ServicoForms
@@ -61,11 +66,10 @@ def logic_servico(): # Regra de Negócio
     method = request.args.get('method')
     value = request.args.get('value')
 
-
-
     forms = ServicoForms()
 
     match method:
+
         case "POST":
             if forms.validate_on_submit():
                 servico = Servico(
@@ -109,5 +113,28 @@ def logic_servico(): # Regra de Negócio
             servico.update_status()
             servico.edit()
             return jsonify(success=True, message="Serviço revisado com sucesso.")
+
+        case "EXPORT":
+            servicos = Servico.query.all()
+            export_dikt = []
+            for servico in servicos:
+                export_dikt.append(servico.to_export_xls())
+            
+
+            df = pd.DataFrame(export_dikt)
+
+            filename = f"{uuid.uuid4()}.xlsx"
+            REPORT_XLSX = os.path.join(REPORT_PATH, filename)
+            
+            df.to_excel(REPORT_XLSX)
+
+            file = io.BytesIO() # Cria um objeto de bytes vazio para armazenar o conteúdo do arquivo
+            with open(REPORT_XLSX, 'rb') as fo: # Abre o arquivo para leitura
+                file.write(fo.read()) # Escreve o conteúdo no objeto de bytes vazio
+            
+            file.seek(0) # Posiciona o cursor no inicio do objeto de bytes vazio
+            os.remove(REPORT_XLSX)
+
+            return send_file(file, mimetype='application/vnd.ms-excel', download_name=filename, as_attachment=True)
 
     return jsonify(success=False, error="Chamada sem condicional.")        

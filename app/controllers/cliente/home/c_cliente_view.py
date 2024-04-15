@@ -1,6 +1,6 @@
 from flask import jsonify, render_template, request
 from flask_login import login_required
-
+from app import db
 from app.controllers.cliente.home.f_cliente import ClienteForms
 from app.controllers.auth.accounts.utils.protector import role_required
 from app.models.cliente.home.m_cliente import Cliente
@@ -32,6 +32,10 @@ def render_cliente(): # Renderização
         case "POST":
             modal_data["title"] = "Novo Registro"
             modal_data["body"] = "Preencha o formulário abaixo."
+
+            ultimo_id = db.session.query(db.func.max(Cliente.id)).scalar()
+            prox_id = ultimo_id + 1 if ultimo_id is not None else 1
+            modal_data["next_client"] = prox_id
  
             forms = ClienteForms()
             return render_template('cliente/home/mr_cliente_view.html', method=method, forms=forms, modal_data=modal_data)

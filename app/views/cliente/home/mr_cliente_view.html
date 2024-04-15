@@ -14,7 +14,7 @@
       <div class="col-md-12">
         <input name="nomeCliente" id="nomeCliente" type="text" class="form-control" placeholder="Nome Completo">
         <div id="telefoneClienteFeedback" class="invalid-feedback">Por favor, forneça um nome válido.</div>
-        <div class="form-text">Não se esqueça de anotar o ID do cliente no verso do cartão, nº <span style="color: chartreuse;">497</span>.</div>
+        <div class="form-text">Não se esqueça de anotar o ID do cliente no verso do cartão, nº <span style="color: chartreuse;">{{ modal_data["next_client"] }}</span>.</div>
       </div>
     </div>
 
@@ -23,12 +23,12 @@
     <div class="row">
       <div class="col-md-6 pe-1">
         <input name="celularCliente" id="celularCliente" type="text" class="form-control custom-no-spinbox" placeholder="Celular" class="contatoCliente">
-        <div id="celularClienteFeedback" class="valid-feedback">Esse telefone tem zapzap?.</div>
+        <div id="celularClienteFeedback" class="valid-feedback">Não esqueça de conferir se esse celular possui WhatsApp mais tarde!</div>
         <div id="celularClienteFeedback" class="invalid-feedback">Por favor, forneça um celular válido.</div>
       </div>
       <div class="col-md-6 ps-1">
         <input name="telefoneCliente" id="telefoneCliente" type="text" class="form-control mrcatra" placeholder="Telefone" class="contatoCliente">
-        <div id="telefoneClienteFeedback" class="valid-feedback">Telefone fixo ainda se usa hoje em dia?.</div>
+        <div id="telefoneClienteFeedback" class="valid-feedback">Telefone validado com sucesso!</div>
         <div id="telefoneClienteFeedback" class="invalid-feedback">Por favor, forneça um telefone válida.</div>
       </div>
     </div>

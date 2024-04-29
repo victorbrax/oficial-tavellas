@@ -53,6 +53,9 @@ class Servico(db.Model, SkeletonModel):
             if current_status_index < len(possiveis_status) - 1:
                 self.status = possiveis_status[current_status_index + 1]
 
+            if current_status_index == 2:
+                self.data_fim = db.func.current_date()
+
 
 
     def update_preco_total(self):
@@ -81,13 +84,18 @@ class Servico(db.Model, SkeletonModel):
     def to_export_xls(self):
         export_dict = {}
         export_dict["id_servico"] = self.id
-        export_dict["id_cliente"] = self.cliente.id
         export_dict["status"] = self.status
+        export_dict["id_cliente"] = self.cliente.id
+        export_dict["celular_cliente"] = self.cliente.celular
+        export_dict["email_cliente"] = self.cliente.email
         export_dict["nome_cliente"] = self.cliente.nome
         export_dict["id_bike"] = self.bike.id
+        export_dict["cor_bike"] = self.bike.cor
         export_dict["descricao_bike"] = self.bike.descricao
         export_dict["data_inicio"] = self.data_inicio
         export_dict["data_fim"] = self.data_fim
+        export_dict["reparos"] = ", ".join([reparo.nome for reparo in self.reparos])
+        export_dict["produtos"] = ", ".join([produto.nome for produto in self.produtos])
         export_dict["preco_total"] = self.preco_total
         return export_dict
 

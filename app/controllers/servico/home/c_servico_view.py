@@ -123,10 +123,10 @@ def logic_servico(): # Regra de Negócio
 
             df = pd.DataFrame(export_dikt)
 
-            filename = f"{uuid.uuid4()}.xlsx"
+            filename = f"relatorio_export_{uuid.uuid4()}.xlsx"
             REPORT_XLSX = os.path.join(REPORT_PATH, filename)
             
-            df.to_excel(REPORT_XLSX)
+            df.to_excel(REPORT_XLSX, index=False)
 
             file = io.BytesIO() # Cria um objeto de bytes vazio para armazenar o conteúdo do arquivo
             with open(REPORT_XLSX, 'rb') as fo: # Abre o arquivo para leitura

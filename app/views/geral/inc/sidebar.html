@@ -14,6 +14,15 @@
       </ul>
     </li>
     <li>
+      <a href="{{ url_for('servico.servico') }}">
+        <i class="bi bi-building-fill-add"></i>
+        <span class="link_name">Novo Serviço</span>
+      </a>
+      <ul class="sub-menu blank">
+        <li><a class="link_name" href="{{ url_for('servico.servico') }}">Novo Serviço</a></li>
+      </ul>
+    </li>
+    <li>
       <div class="iocn-link">
         <a href="#">
           <i class="bi bi-node-plus-fill"></i>
@@ -26,7 +35,6 @@
         {% if current_user.is_authenticated and current_user.has_role('Admin') %}
         <li><a href="{{ url_for('cliente.cliente') }}">Cliente</a></li>
         <li><a href="{{ url_for('bike.bike') }}">Bike</a></li>
-        <li><a href="{{ url_for('servico.servico') }}">Serviço</a></li>
         <li><a href="{{ url_for('produto.produto') }}">Produto</a></li>
         <li><a href="{{ url_for('reparo.reparo') }}">Reparo</a></li>
         {% endif %}

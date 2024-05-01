@@ -23,9 +23,9 @@ def forgot():
             reset_link = url_for('auth.forgot_reset', token=user_token, _external=True)
 
             msg = Message()
-            msg.subject = "Validação de Troca de Senha - [Portal CIC]"
+            msg.subject = "Validação de Troca de Senha - [Sitema Tavella's]"
             msg.recipients = [user.email]
-            msg.html = render_template("auth/accounts/email/v_forgot_mail.html", reset_link=reset_link)
+            msg.html = render_template("auth/accounts/email/forgot_mail.html", reset_link=reset_link)
             mail.send(msg)
             return redirect(url_for("auth.login"))
 

@@ -49,9 +49,10 @@
         <i class="bi bi-caret-down-fill"></i>
       </div>
       <ul class="sub-menu">
+        
         <li><a class="link_name" href="#">Relatórios</a></li>
-        <li><a href="#" target="_blank">Novo Relatório</a></li>
-        <li><a href="#" target="_blank">Relatórios Anteriores </a></li>
+        <li><a href="{{ url_for('servico.logic_servico') }}?method=REPORT">Relatório de Serviços</a></li>
+        <li><a href="{{ url_for('bike.logic_bike') }}?method=REPORT">Relatório de Bikes</a></li>
       </ul>
     </li>
     {% if current_user.is_authenticated and current_user.has_role('Admin') %}
@@ -71,12 +72,12 @@
     {% endif %}
     {% if current_user.is_authenticated and current_user.has_role('Admin') %}
     <li>
-      <a href="{{ url_for('home.home') }}">
+      <a href="mailto:joaogomespcl@gmail.com">
         <i class="bi bi-flag-fill"></i>
         <span class="link_name">Suporte</span>
       </a>
       <ul class="sub-menu blank">
-        <li><a class="link_name" href="{{ url_for('home.home') }}">Suporte</a></li>
+        <li><a class="link_name" href="mailto:joaogomespcl@gmail.com">Suporte</a></li>
       </ul>
     </li>
     <li>
@@ -84,7 +85,7 @@
     <li>
       <div class="profile-details">
         <div class="profile-content">
-          <img src="{{ current_user.image_path }}" alt="profileImg">
+          <img src="{{ current_user.imagem_url }}" alt="profileImg">
         </div>
         <div class="name-job">
           <div class="profile_name">{{ current_user }}</div>

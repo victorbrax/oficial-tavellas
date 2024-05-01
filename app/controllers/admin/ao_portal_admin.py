@@ -23,11 +23,11 @@ class ControlAdminView(AdminIndexView): # Herança de AdminIndexView para permit
 
 class UserView(ModelView):
     column_hide_backrefs = False
-    column_list = ("first_name", "last_name", "email", "active", "roles")
-    column_searchable_list = ["first_name", "last_name", "email"]
-    column_editable_list = ["first_name", "last_name", "email", "roles", "active", "image_path"]
+    column_list = ("nome", "sobrenome", "email", "ativo", "roles")
+    column_searchable_list = ["nome", "sobrenome", "email"]
+    column_editable_list = ["nome", "sobrenome", "email", "roles", "ativo", "imagem_url"]
     column_filters = ["roles"]
-    form_columns = ["first_name", "last_name", "email", "password", "active", "image_path", "roles"]
+    form_columns = ["nome", "sobrenome", "email", "password", "ativo", "imagem_url", "roles"]
 
     def on_model_change(self, form, model, is_created):
         if hasattr(form, 'password') and form.password.data:
@@ -35,8 +35,8 @@ class UserView(ModelView):
                 model.password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
 
     def on_form_prefill(self, form, id):
-        if not form.image_path.data:
-            form.image_path.data = f'https://ui-avatars.com/api/?name={form.first_name.data}+{form.last_name.data}&background=random'
+        if not form.imagem_url.data:
+            form.imagem_url.data = f'https://ui-avatars.com/api/?name={form.nome.data}+{form.sobrenome.data}&background=random'
 
 class RoleView(ModelView):
     form_excluded_columns = ["user"]

@@ -10,6 +10,7 @@ class ClienteForms(FlaskForm):
     cep = StringField(validators=[validators.DataRequired()])
     rua = StringField(validators=[validators.DataRequired()])
     bairro = StringField(validators=[validators.DataRequired()])
+    complemento = StringField()
     numero = StringField(validators=[validators.DataRequired()])
     cidade = StringField(validators=[validators.DataRequired()])
     estado = StringField(validators=[validators.DataRequired()])

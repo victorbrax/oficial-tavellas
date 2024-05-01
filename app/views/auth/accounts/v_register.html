@@ -24,12 +24,12 @@
         <form method="POST" action="{{ url_for('auth.register') }}">
           {{ form.hidden_tag() }}
           <div class="input-field">
-            {{ form.first_name(class_="input", id_="first_name", required_="", autocomplete_="off") }}
-            <label for="first_name">Nome</label>
+            {{ form.nome(class_="input", id_="nome", required_="", autocomplete_="off") }}
+            <label for="nome">Nome</label>
           </div>
           <div class="input-field">
-            {{ form.last_name(class_="input", id_="last_name", required_="", autocomplete_="off") }}
-            <label for="last_name">Sobrenome</label>
+            {{ form.sobrenome(class_="input", id_="sobrenome", required_="", autocomplete_="off") }}
+            <label for="sobrenome">Sobrenome</label>
           </div>
           <div class="input-field">
             {{ form.email(class_="input", id_="email", required_="", autocomplete_="off") }}

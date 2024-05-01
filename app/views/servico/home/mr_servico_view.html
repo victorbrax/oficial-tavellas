@@ -2,7 +2,7 @@
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <i type="button" class="bi bi-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
 </div>
 <div class="modal-body">
   <p>{{ modal_data["body"] }}</p>
@@ -43,14 +43,15 @@
 </div>
 
 <script> // Script para popular o select de Bikes
+(function() {
   let cliente_select = document.getElementById("cliente");
   let bike_select = document.getElementById("bike");
 
   cliente_select.onchange = function () {
-    cliente = cliente_select.value;
+    let cliente = cliente_select.value;
 
     fetch('/api/bike/dono/' + cliente).then(function(response) {
-      response.json().then(function(data){
+      response.json().then(function(data) {
         let bikeOptionHTML = '';
         for (let bike of data.bikes) {
           bikeOptionHTML += `<option value="${bike.id}">${bike.id}. ${bike.descricao}</option>`;
@@ -59,13 +60,15 @@
       });
     });
   };
+})();
+
 </script>
 
 {% elif method == "DELETE" %}
 
 <div class="modal-header">
   <h4 class="modal-title">{{ modal_data["title"] }}</h4>
-  <i type="button" class="close bx bx-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
+  <i type="button" class="bi bi-x" data-dismiss="modal" style="font-weight: bold; font-size: 25px; caret-color: transparent;"></i>
 </div>
 <div class="modal-body">
   <p>{{ modal_data["body"] }}</p>

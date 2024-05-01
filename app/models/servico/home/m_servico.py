@@ -78,8 +78,24 @@ class Servico(db.Model, SkeletonModel):
         model_dict['produtos'] = ", ".join([produto.nome for produto in self.produtos])
         model_dict['cliente'] = f"{self.cliente.id}. {self.cliente.nome}"
         model_dict['bike'] = self.bike.descricao
-        model_dict['usuario'] = f"{self.usuario.first_name} {self.usuario.last_name}"
+        model_dict['usuario'] = f"{self.usuario.nome} {self.usuario.sobrenome}"
         return model_dict
+    
+    def to_export_reports(self):
+        export_dict = {}
+        export_dict["id_servico"] = self.id
+        export_dict["descricao_bike"] = self.bike.descricao
+        export_dict["modelo_bike"] = self.bike.modelo
+        export_dict["status"] = self.status
+        export_dict["reparos"] = ", ".join([reparo.nome for reparo in self.reparos])
+        export_dict["observacao"] = self.bike.condicao
+        export_dict["responsavel"] = f"{self.usuario.nome} {self.usuario.sobrenome}"
+        export_dict["email_responsavel"] = self.usuario.email
+        export_dict["celular_responsavel"] = "19 99287-1844"
+        export_dict["data_inicio"] = self.data_inicio
+        export_dict["data_fim"] = self.data_fim
+        export_dict["celular_cliente"] = self.cliente.celular
+        return export_dict
     
     def to_export_xls(self):
         export_dict = {}
@@ -89,7 +105,7 @@ class Servico(db.Model, SkeletonModel):
         export_dict["status"] = self.status
         export_dict["reparos"] = ", ".join([reparo.nome for reparo in self.reparos])
         export_dict["observacao"] = self.bike.condicao
-        export_dict["responsavel"] = f"{self.usuario.first_name} {self.usuario.last_name}"
+        export_dict["responsavel"] = f"{self.usuario.nome} {self.usuario.sobrenome}"
         export_dict["email_responsavel"] = self.usuario.email
         export_dict["celular_responsavel"] = "19 99287-1844"
         export_dict["data_inicio"] = self.data_inicio

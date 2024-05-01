@@ -1,4 +1,10 @@
-from flask import jsonify, render_template, request
+from config import REPORT_PATH
+import io
+import uuid
+import os
+import pandas as pd
+from app.models.bike.home.m_bike import Bike
+from flask import jsonify, render_template, request, send_file
 from flask_login import login_required
 
 from app.controllers.bike.home.f_bike import BikeForms
@@ -104,5 +110,26 @@ def logic_bike(): # Regra de Negócio
             bike.descricao = bike.descricao.swapcase()
             bike.edit()
             return jsonify(success=True, message="Bike revisada com sucesso.")
+
+
+        case "REPORT":
+            bikes = Bike.query.all()
+            data = [bike.to_export_reports() for bike in bikes]
+            df = pd.DataFrame(data)
+
+            filename = f"relatorio_bikes_{uuid.uuid4()}.xlsx"
+            REPORT_CSV = os.path.join(REPORT_PATH, filename)
+        
+            df.to_excel(REPORT_CSV, index=False)
+
+            file = io.BytesIO() # Cria um objeto de bytes vazio para armazenar o conteúdo do arquivo
+            with open(REPORT_CSV, 'rb') as fo: # Abre o arquivo para leitura
+                file.write(fo.read()) # Escreve o conteúdo no objeto de bytes vazio
+            
+            file.seek(0) # Posiciona o cursor no inicio do objeto de bytes vazio
+            os.remove(REPORT_CSV)
+
+            return send_file(file, mimetype='application/vnd.ms-excel', download_name=filename, as_attachment=True)
+
 
     return jsonify(success=False, error="Chamada sem condicional.")        

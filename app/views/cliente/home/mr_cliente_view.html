@@ -31,24 +31,28 @@
       {{ forms.cep(class_="form-control") }}
     </div>
     <div class="form-group"> 
-      <label class="form-label" for="rua">Rua:</label>
-      {{ forms.rua(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="bairro">Bairro:</label>
-      {{ forms.bairro(class_="form-control") }}
-    </div>
-    <div class="form-group"> 
-      <label class="form-label" for="numero">Número:</label>
-      {{ forms.numero(class_="form-control") }}
+      <label class="form-label" for="estado">Estado:</label>
+      {{ forms.estado(class_="form-control") }}
     </div>
     <div class="form-group"> 
       <label class="form-label" for="cidade">Cidade:</label>
       {{ forms.cidade(class_="form-control") }}
     </div>
     <div class="form-group"> 
-      <label class="form-label" for="estado">Estado:</label>
-      {{ forms.estado(class_="form-control") }}
+      <label class="form-label" for="bairro">Bairro:</label>
+      {{ forms.bairro(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="rua">Rua:</label>
+      {{ forms.rua(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="numero">Número:</label>
+      {{ forms.numero(class_="form-control") }}
+    </div>
+    <div class="form-group"> 
+      <label class="form-label" for="complemento">Complemento:</label>
+      {{ forms.complemento(class_="form-control") }}
     </div>
   </form>
 </div>
@@ -103,6 +107,8 @@
 <input type="text" class="form-control" value="{{ modal_data['cidade'] }}" readonly>
 <label>Estado</label>
 <input type="text" class="form-control" value="{{ modal_data['estado'] }}" readonly>  
+<label>Complemento</label>
+<input type="text" class="form-control" value="{{ modal_data['complemento'] }}" readonly>  
 
 </div>
 <div class="modal-footer">

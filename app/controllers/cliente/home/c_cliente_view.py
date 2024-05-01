@@ -62,6 +62,7 @@ def render_cliente(): # Renderização
             modal_data["telefone"] = cliente.telefone
             modal_data["estado"] = cliente.estado
             modal_data["cidade"] = cliente.cidade
+            modal_data["complemento"] = cliente.complemento
 
             modal_data["celular"] = cliente.celular
 
@@ -94,7 +95,8 @@ def logic_cliente(): # Regra de Negócio
                     bairro = forms.bairro.data,
                     numero = forms.numero.data,
                     cidade = forms.cidade.data,
-                    estado = forms.estado.data
+                    estado = forms.estado.data,
+                    complemento = forms.complemento.data
                     )
                 cliente.save()
                 return jsonify(success=True, message="cliente criada com sucesso.")

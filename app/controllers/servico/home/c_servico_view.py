@@ -114,6 +114,25 @@ def logic_servico(): # Regra de Negócio
             servico.edit()
             return jsonify(success=True, message="Serviço revisado com sucesso.")
 
+        case "REPORT":
+            servicos = Servico.query.all()
+            data = [servico.to_export_reports() for servico in servicos]
+            df = pd.DataFrame(data)
+
+            filename = f"relatorio_servicos_{uuid.uuid4()}.xlsx"
+            REPORT_CSV = os.path.join(REPORT_PATH, filename)
+        
+            df.to_excel(REPORT_CSV, index=False)
+
+            file = io.BytesIO() # Cria um objeto de bytes vazio para armazenar o conteúdo do arquivo
+            with open(REPORT_CSV, 'rb') as fo: # Abre o arquivo para leitura
+                file.write(fo.read()) # Escreve o conteúdo no objeto de bytes vazio
+            
+            file.seek(0) # Posiciona o cursor no inicio do objeto de bytes vazio
+            os.remove(REPORT_CSV)
+
+            return send_file(file, mimetype='application/vnd.ms-excel', download_name=filename, as_attachment=True)
+
         case "EXPORT":
             servicos = Servico.query.all()
             export_dikt = []
@@ -124,16 +143,16 @@ def logic_servico(): # Regra de Negócio
             df = pd.DataFrame(export_dikt)
 
             filename = f"relatorio_export_{uuid.uuid4()}.csv"
-            REPORT_XLSX = os.path.join(REPORT_PATH, filename)
+            REPORT_CSV = os.path.join(REPORT_PATH, filename)
             
-            df.to_csv(REPORT_XLSX, sep=";", index=False, encoding="utf-8")
+            df.to_csv(REPORT_CSV, sep=";", index=False, encoding='utf-8-sig')
 
             file = io.BytesIO() # Cria um objeto de bytes vazio para armazenar o conteúdo do arquivo
-            with open(REPORT_XLSX, 'rb') as fo: # Abre o arquivo para leitura
+            with open(REPORT_CSV, 'rb') as fo: # Abre o arquivo para leitura
                 file.write(fo.read()) # Escreve o conteúdo no objeto de bytes vazio
             
             file.seek(0) # Posiciona o cursor no inicio do objeto de bytes vazio
-            os.remove(REPORT_XLSX)
+            os.remove(REPORT_CSV)
 
             return send_file(file, mimetype='application/vnd.ms-excel', download_name=filename, as_attachment=True)
 

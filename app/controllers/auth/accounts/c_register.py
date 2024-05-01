@@ -14,15 +14,15 @@ def register():
     form = RegistrationForm()
 
     if request.method == "POST" and form.validate():
-        first_name = form.first_name.data
-        last_name = form.last_name.data
+        nome = form.nome.data
+        sobrenome = form.sobrenome.data
         email = form.email.data
         password = form.password.data
         hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
 
         if not User.verify_existing(email=email):
             try:
-                user = User(email=email, password=hashed_password, first_name=first_name, last_name=last_name, active=True)
+                user = User(email=email, password=hashed_password, nome=nome, sobrenome=sobrenome, ativo=True)
                 user_role = Role.query.get(1)
                 user.roles.append(user_role)
                 user.save()

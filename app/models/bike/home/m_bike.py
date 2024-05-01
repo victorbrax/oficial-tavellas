@@ -1,7 +1,7 @@
 from database import db
 
 from ... import SkeletonModel
-
+from app.models.cliente.home.m_cliente import Cliente
 
 class Bike(db.Model, SkeletonModel):
     __tablename__ = "bike"
@@ -41,6 +41,20 @@ class Bike(db.Model, SkeletonModel):
         model_dict['is_reviewed'] = self.is_reviewed
         model_dict['cliente'] = self.cliente.nome
         return model_dict
+
+    def to_export_reports(self):
+        report_dict = {}
+        report_dict['id'] = self.id
+        report_dict['cliente'] = self.cliente.nome
+        report_dict["celular_cliente"] = self.cliente.celular
+        report_dict['descricao'] = self.descricao
+        report_dict['modelo'] = self.modelo
+        report_dict['condicao'] = self.condicao
+        report_dict['aro'] = self.aro
+        report_dict['quadro'] = self.quadro
+        report_dict['cor'] = self.cor
+        report_dict['data_criacao'] = self.data_criacao
+        return report_dict
 
     @classmethod
     def is_createble(cls):

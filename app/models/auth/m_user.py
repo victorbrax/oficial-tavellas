@@ -14,25 +14,25 @@ class User(db.Model, UserMixin, SkeletonModel):
     # __bind_key__ = "DEV"
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(255))
-    last_name = db.Column(db.String(255))
+    nome = db.Column(db.String(255))
+    sobrenome = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
-    active = db.Column(db.Boolean())
-    image_path = db.Column(db.String(255))
+    ativo = db.Column(db.Boolean())
+    imagem_url = db.Column(db.String(255))
     user_token = db.Column(db.String(255))
     token_expiration = db.Column(db.DateTime)
     roles = db.relationship("Role", secondary=role_user, backref=db.backref("user", lazy="dynamic"))
 
-    def __init__(self, first_name, last_name, email, password, active):
-        self.first_name = first_name
-        self.last_name = last_name
+    def __init__(self, nome, sobrenome, email, password, ativo):
+        self.nome = nome
+        self.sobrenome = sobrenome
         self.password = password
         self.email = email
-        self.active = active
+        self.ativo = ativo
         self.user_token = None
         self.token_expiration = None
-        self.image_path = f'https://ui-avatars.com/api/?name={self.first_name}+{self.last_name}&background=random'
+        self.imagem_url = f'https://ui-avatars.com/api/?name={self.nome}+{self.sobrenome}&background=random'
 
     def gen_token(self):
         self.token_expiration = datetime.now() + timedelta(minutes=30)
@@ -50,7 +50,7 @@ class User(db.Model, UserMixin, SkeletonModel):
         return False
 
     def __repr__(self):
-        return "<User %r>" % self.first_name
+        return "<User %r>" % self.nome
     
     def __str__(self):
-        return self.first_name if len(f"{self.first_name} {self.last_name}") > 12 else f"{self.first_name} {self.last_name}"
+        return self.nome if len(f"{self.nome} {self.sobrenome}") > 12 else f"{self.nome} {self.sobrenome}"

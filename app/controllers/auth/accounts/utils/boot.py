@@ -15,9 +15,9 @@ def create_thor_user():
         super_thor = User(
             email="thor@tavellas.com.br",
             password = bcrypt.generate_password_hash("au1234au").decode("utf-8"),
-            first_name="Thor",
-            last_name="Tavellas",
-            active=True
+            nome="Thor",
+            sobrenome="Tavellas",
+            ativo=True
         )
         super_role = Role.query.filter_by(name="dog").first()
 
